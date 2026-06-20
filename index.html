@@ -1,27 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Postal Realidad Aumentada - Café</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    
     <style>
-      /* Estilos para el botón de inicio */
-      #overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex; justify-content: center; align-items: center;
-        z-index: 9999; font-family: sans-serif;
+      body {
+        margin: 0;
+        overflow: hidden;
       }
+      /* Pantalla de inicio para activar el audio */
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family: sans-serif;
+      }
+      /* Botón moderno estilo cinematográfico */
       #startButton {
-        padding: 20px 40px; font-size: 20px; font-weight: bold;
-        color: #000; background: #deff9a; border: none; border-radius: 50px;
-        cursor: pointer; letter-spacing: 1px;
+        padding: 20px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+        background: #deff9a;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 20px rgba(222, 255, 154, 0.3);
+        transition: transform 0.2s;
+      }
+      #startButton:active {
+        transform: scale(0.95);
       }
     </style>
   </head>
   <body>
+
     <div id="overlay">
-      <button id="startButton">INICIAR EXPERIENCIA INMERSIVA</button>
+      <button id="startButton">INICIAR EXPERIENCIA</button>
     </div>
 
     <a-scene 
@@ -30,14 +57,35 @@
       renderer="colorManagement: true, physicallyCorrectLights" 
       vr-mode-ui="enabled: false" 
       device-orientation-permission-ui="enabled: false"
-      style="visibility: hidden;"> <a-assets>
+      style="visibility: hidden;">
+      
+      <a-assets>
         <video id="vid" src="./video.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+        <a-asset-item id="modelo-grano" src="./grano.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0" id="target">
+        
         <a-video src="#vid" position="0 0 0" width="1" height="0.56"></a-video>
+
+        <a-entity 
+          gltf-model="#modelo-grano" 
+          position="-0.7 0 0.1" 
+          scale="0.2 0.2 0.2" 
+          animation="property: position; to: -0.7 0.1 0.1; dir: alternate; dur: 2000; loop: true; easing: easeInOutSine"
+          animation__rot="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear">
+        </a-entity>
+
+        <a-entity 
+          gltf-model="#modelo-grano" 
+          position="0.7 0 0.1" 
+          scale="0.2 0.2 0.2" 
+          animation="property: position; to: 0.7 -0.1 0.1; dir: alternate; dur: 2500; loop: true; easing: easeInOutSine"
+          animation__rot="property: rotation; to: 360 360 0; loop: true; dur: 5500; easing: linear">
+        </a-entity>
+
       </a-entity>
     </a-scene>
 
@@ -48,23 +96,24 @@
       const target = document.querySelector('#target');
       const vid = document.querySelector('#vid');
 
-      // ACCIÓN AL TOCAR EL BOTÓN
+      // Acción al presionar el botón de inicio
       startButton.addEventListener('click', () => {
-        overlay.style.display = 'none'; // Quitar botón
-        scene.style.visibility = 'visible'; // Mostrar cámara
-        vid.muted = false; // DESBLOQUEAR AUDIO
+        overlay.style.display = 'none'; // Oculta la pantalla negra
+        scene.style.visibility = 'visible'; // Enciende la cámara
+        vid.muted = false; // Desbloquea el canal de audio para el navegador
         
-        // Un pequeño truco para despertar el motor de audio en iOS
+        // Inicialización fantasma para forzar la activación de audio en iOS/Safari
         vid.play().then(() => {
           vid.pause();
-        });
+        }).catch(err => console.log("Audio inicializado correctamente"));
       });
 
-      // LÓGICA DE REPRODUCCIÓN AL ENCONTRAR LA POSTAL
+      // Reproducir cuando detecta la postal física
       target.addEventListener("targetFound", event => {
         vid.play();
       });
 
+      // Pausar si se pierde de vista la postal
       target.addEventListener("targetLost", event => {
         vid.pause();
       });
