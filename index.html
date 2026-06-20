@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./marcador.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="vid" src="./video.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" id="target">
+        <a-video src="#vid" position="0 0 0" width="1" height="0.56"></a-video>
+      </a-entity>
+      
+    </a-scene>
+
+    <script>
+      const target = document.querySelector('#target');
+      const vid = document.querySelector('#vid');
+
+      // Reproducir cuando la cámara capta la postal
+      target.addEventListener("targetFound", event => {
+        vid.play();
+      });
+
+      // Pausar si el usuario voltea el celular a otro lado
+      target.addEventListener("targetLost", event => {
+        vid.pause();
+      });
+    </script>
+  </body>
+</html>
