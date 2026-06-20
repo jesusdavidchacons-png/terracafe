@@ -56,8 +56,7 @@
       color-space="sRGB" 
       renderer="colorManagement: true, physicallyCorrectLights" 
       vr-mode-ui="enabled: false" 
-      device-orientation-permission-ui="enabled: false"
-      style="visibility: hidden;">
+      device-orientation-permission-ui="enabled: false">
       
       <a-assets>
         <video id="vid" src="./video.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline muted></video>
@@ -92,20 +91,18 @@
     <script>
       const overlay = document.querySelector('#overlay');
       const startButton = document.querySelector('#startButton');
-      const scene = document.querySelector('a-scene');
       const target = document.querySelector('#target');
       const vid = document.querySelector('#vid');
 
       // Acción al presionar el botón de inicio
       startButton.addEventListener('click', () => {
         overlay.style.display = 'none'; // Oculta la pantalla negra
-        scene.style.visibility = 'visible'; // Enciende la cámara
         vid.muted = false; // Desbloquea el canal de audio para el navegador
         
         // Inicialización fantasma para forzar la activación de audio en iOS/Safari
         vid.play().then(() => {
           vid.pause();
-        }).catch(err => console.log("Audio inicializado correctamente"));
+        }).catch(err => console.log("Audio inicializado"));
       });
 
       // Reproducir cuando detecta la postal física
