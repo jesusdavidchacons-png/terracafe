@@ -4,11 +4,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      /* Estilos para el botón de inicio */
+      #overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex; justify-content: center; align-items: center;
+        z-index: 9999; font-family: sans-serif;
+      }
+      #startButton {
+        padding: 20px 40px; font-size: 20px; font-weight: bold;
+        color: #000; background: #deff9a; border: none; border-radius: 50px;
+        cursor: pointer; letter-spacing: 1px;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./marcador.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      
-      <a-assets>
+    <div id="overlay">
+      <button id="startButton">INICIAR EXPERIENCIA INMERSIVA</button>
+    </div>
+
+    <a-scene 
+      mindar-image="imageTargetSrc: ./marcador.mind; filterMinCF: 0.0001; filterBeta: 0.001; uiScanning: no;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false"
+      style="visibility: hidden;"> <a-assets>
         <video id="vid" src="./video.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline muted></video>
       </a-assets>
 
@@ -17,19 +39,32 @@
       <a-entity mindar-image-target="targetIndex: 0" id="target">
         <a-video src="#vid" position="0 0 0" width="1" height="0.56"></a-video>
       </a-entity>
-      
     </a-scene>
 
     <script>
+      const overlay = document.querySelector('#overlay');
+      const startButton = document.querySelector('#startButton');
+      const scene = document.querySelector('a-scene');
       const target = document.querySelector('#target');
       const vid = document.querySelector('#vid');
 
-      // Reproducir cuando la cámara capta la postal
+      // ACCIÓN AL TOCAR EL BOTÓN
+      startButton.addEventListener('click', () => {
+        overlay.style.display = 'none'; // Quitar botón
+        scene.style.visibility = 'visible'; // Mostrar cámara
+        vid.muted = false; // DESBLOQUEAR AUDIO
+        
+        // Un pequeño truco para despertar el motor de audio en iOS
+        vid.play().then(() => {
+          vid.pause();
+        });
+      });
+
+      // LÓGICA DE REPRODUCCIÓN AL ENCONTRAR LA POSTAL
       target.addEventListener("targetFound", event => {
         vid.play();
       });
 
-      // Pausar si el usuario voltea el celular a otro lado
       target.addEventListener("targetLost", event => {
         vid.pause();
       });
