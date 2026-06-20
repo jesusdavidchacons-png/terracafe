@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Postal Realidad Aumentada - Café</title>
+    <title>Postal Realidad Aumentada</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     
@@ -60,7 +60,7 @@
       
       <a-assets>
         <video id="vid" src="./video.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline muted></video>
-        <a-asset-item id="modelo-grano" src="./grano.glb"></a-asset-item>
+        <a-asset-item id="grano" src="./coffee_bean_-_pbr.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -69,20 +69,24 @@
         
         <a-video src="#vid" position="0 0 0" width="1" height="0.56"></a-video>
 
-        <a-entity 
-          gltf-model="#modelo-grano" 
-          position="-0.7 0 0.1" 
-          scale="0.2 0.2 0.2" 
-          animation="property: position; to: -0.7 0.1 0.1; dir: alternate; dur: 2000; loop: true; easing: easeInOutSine"
-          animation__rot="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear">
+        <a-entity gltf-model="#grano" position="-0.75 0.3 0.15" scale="0.1 0.1 0.1"
+          animation="property: position; to: -0.75 0.35 0.15; dir: alternate; dur: 2200; loop: true; easing: easeInOutSine"
+          animation__rot="property: rotation; to: 360 360 0; loop: true; dur: 5000; easing: linear">
         </a-entity>
 
-        <a-entity 
-          gltf-model="#modelo-grano" 
-          position="0.7 0 0.1" 
-          scale="0.2 0.2 0.2" 
-          animation="property: position; to: 0.7 -0.1 0.1; dir: alternate; dur: 2500; loop: true; easing: easeInOutSine"
-          animation__rot="property: rotation; to: 360 360 0; loop: true; dur: 5500; easing: linear">
+        <a-entity gltf-model="#grano" position="-0.8 -0.25 0.2" scale="0.15 0.15 0.15"
+          animation="property: position; to: -0.8 -0.15 0.2; dir: alternate; dur: 2600; loop: true; easing: easeInOutSine"
+          animation__rot="property: rotation; to: 0 -360 360; loop: true; dur: 6500; easing: linear">
+        </a-entity>
+
+        <a-entity gltf-model="#grano" position="0.75 0.25 0.1" scale="0.08 0.08 0.08"
+          animation="property: position; to: 0.75 0.35 0.1; dir: alternate; dur: 1900; loop: true; easing: easeInOutSine"
+          animation__rot="property: rotation; to: -360 360 0; loop: true; dur: 4500; easing: linear">
+        </a-entity>
+
+        <a-entity gltf-model="#grano" position="0.8 -0.3 0.15" scale="0.12 0.12 0.12"
+          animation="property: position; to: 0.8 -0.2 0.15; dir: alternate; dur: 2400; loop: true; easing: easeInOutSine"
+          animation__rot="property: rotation; to: 360 0 -360; loop: true; dur: 5500; easing: linear">
         </a-entity>
 
       </a-entity>
@@ -102,7 +106,7 @@
         // Inicialización fantasma para forzar la activación de audio en iOS/Safari
         vid.play().then(() => {
           vid.pause();
-        }).catch(err => console.log("Audio inicializado"));
+        }).catch(err => console.log("Audio inicializado correctamente"));
       });
 
       // Reproducir cuando detecta la postal física
