@@ -3,25 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DESTINOS VEN — Aragua Full Experience (Google Places)</title>
+  <title>DESTINOS VEN — Misiones de Fin de Semana</title>
+  
+  <!-- Tipografías Vanguardistas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(18, 22, 34, 0.72);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent: #10b981;
-      --accent-glow: rgba(16, 185, 129, 0.35);
-      --gold: #f59e0b;
-      --gold-glow: rgba(245, 158, 11, 0.3);
-      --cyan: #06b6d4;
-      --cyan-glow: rgba(6, 182, 212, 0.3);
-      --google-blue: #4285F4;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-base: #080A0F;
+      --bg-surface: rgba(18, 23, 34, 0.75);
+      --bg-card: rgba(22, 28, 42, 0.65);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(5, 223, 114, 0.35);
+      
+      --brand-green: #05DF72;
+      --brand-green-glow: rgba(5, 223, 114, 0.3);
+      --brand-gold: #FFC72C;
+      --brand-gold-glow: rgba(255, 199, 44, 0.25);
+      --brand-cyan: #00D2FF;
+      --brand-rose: #FF2E63;
+      
+      --text-primary: #FFFFFF;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
     }
 
     * {
@@ -33,615 +39,462 @@
     }
 
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       background-image: 
-        radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 85%, rgba(66, 133, 244, 0.08) 0%, transparent 45%);
+        radial-gradient(circle at 15% 10%, rgba(5, 223, 114, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(255, 199, 44, 0.06) 0%, transparent 45%);
     }
 
-    .app-viewport {
+    /* Contenedor Mobile First */
+    .app-screen {
       width: 100%;
       max-width: 440px;
       min-height: 100vh;
-      background: rgba(10, 13, 20, 0.95);
-      border-left: 1px solid var(--card-border);
-      border-right: 1px solid var(--card-border);
+      background: rgba(10, 13, 20, 0.98);
+      border-left: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-      padding-bottom: 90px;
+      padding-bottom: 96px;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.85);
     }
 
+    /* Header Minimalista */
     header {
-      padding: 18px 20px 12px;
+      padding: 20px 20px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
-      z-index: 40;
-      background: rgba(7, 9, 14, 0.9);
-      border-bottom: 1px solid var(--card-border);
+      z-index: 50;
+      background: rgba(8, 10, 15, 0.9);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .brand-group h1 {
+    .brand-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.15rem;
       letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 700;
-      background: linear-gradient(90deg, #fff, #94a3b8);
+      font-weight: 800;
+      background: linear-gradient(90deg, #FFFFFF, #94A3B8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .brand-sub {
+    .brand-tag {
       font-size: 0.65rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
+      color: var(--brand-green);
+      font-weight: 800;
     }
 
-    .status-badge {
+    /* Píldoras de Progreso en Header */
+    .header-stats {
+      display: flex;
+      gap: 8px;
+    }
+
+    .stat-pill {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid var(--accent-glow);
-      padding: 6px 14px;
+      gap: 5px;
+      padding: 5px 10px;
       border-radius: 999px;
-    }
-
-    .status-badge .pts {
       font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--accent);
-      font-size: 0.85rem;
     }
 
-    .view-container {
+    .pill-savings {
+      background: rgba(5, 223, 114, 0.1);
+      border: 1px solid var(--brand-green-glow);
+      color: var(--brand-green);
+    }
+
+    .pill-xp {
+      background: rgba(255, 199, 44, 0.1);
+      border: 1px solid var(--brand-gold-glow);
+      color: var(--brand-gold);
+    }
+
+    /* Contenedor de Vistas */
+    .view-content {
       display: none;
-      padding: 16px 20px;
-      animation: fadeIn 0.25s ease forwards;
+      padding: 18px 20px;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .view-container.active { display: block; }
+    .view-content.active { display: block; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Buscador & Filtros */
-    .search-box {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 10px 14px;
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.8rem;
-      outline: none;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .search-box input {
-      background: none;
-      border: none;
-      outline: none;
-      color: #fff;
-      width: 100%;
-      font-size: 0.8rem;
-    }
-
-    .category-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      scrollbar-width: none;
-    }
-    .category-scroll::-webkit-scrollbar { display: none; }
-
-    .cat-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      white-space: nowrap;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.2s;
-    }
-
-    .cat-btn.active {
-      background: var(--text-main);
-      color: var(--bg-dark);
-      border-color: var(--text-main);
-      box-shadow: 0 0 14px rgba(255, 255, 255, 0.2);
-    }
-
-    /* Sincronización Google Places */
-    .google-sync-card {
-      background: rgba(66, 133, 244, 0.08);
-      border: 1px solid rgba(66, 133, 244, 0.25);
-      border-radius: 14px;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .google-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .google-pill svg { width: 16px; height: 16px; }
-    .gps-state { font-size: 0.68rem; color: var(--accent); font-weight: 600; }
-
-    /* Radar Aéreo Terminal Card */
-    .flight-terminal-banner {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(18, 22, 34, 0.8) 100%);
-      border: 1px solid var(--cyan-glow);
-      border-radius: 20px;
-      padding: 16px;
+    /* Hero de Misión de Fin de Semana */
+    .weekend-hero {
+      background: linear-gradient(135deg, rgba(22, 28, 42, 0.9) 0%, rgba(13, 17, 26, 0.9) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 18px;
       margin-bottom: 20px;
       position: relative;
-    }
-
-    .terminal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 8px var(--cyan);
-      animation: pulse 1.6s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.9); opacity: 0.5; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.5; }
-    }
-
-    .flight-toggle-row {
-      display: flex;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
-
-    .flight-toggle-btn {
-      flex: 1;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 6px 0;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .flight-toggle-btn.active { background: rgba(255, 255, 255, 0.1); color: #fff; }
-
-    .flight-item {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 10px 12px;
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .flight-code { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; color: #fff; }
-    .flight-status { padding: 4px 8px; border-radius: 6px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; }
-    .status-on-time { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
-    .status-boarding { background: rgba(245, 158, 11, 0.15); color: var(--gold); }
-    .status-landed { background: rgba(6, 182, 212, 0.15); color: var(--cyan); }
-
-    /* Tarjetas de Destinos */
-    .destination-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
       overflow: hidden;
-      margin-bottom: 18px;
-      backdrop-filter: blur(16px);
-      transition: transform 0.2s ease;
     }
 
-    .card-img-wrap {
-      width: 100%;
-      height: 175px;
+    .weekend-hero::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, var(--brand-green-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--brand-green);
+      background: rgba(5, 223, 114, 0.12);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .hero-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Selector de Rutas (Cards Panorámicas) */
+    .route-selector-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scrollbar-width: none;
+    }
+    .route-selector-scroll::-webkit-scrollbar { display: none; }
+
+    .route-card-thumb {
+      flex: 0 0 135px;
+      height: 165px;
+      border-radius: 18px;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.25s ease;
     }
 
-    .card-img-wrap img {
+    .route-card-thumb.selected {
+      border-color: var(--brand-green);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(5, 223, 114, 0.25);
+    }
+
+    .route-card-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.9);
+      filter: brightness(0.7);
     }
 
-    .card-tag {
+    .route-card-thumb .thumb-info {
       position: absolute;
-      top: 14px;
-      left: 14px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(10px);
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+    }
+
+    .thumb-tag {
+      font-size: 0.58rem;
+      font-weight: 800;
       text-transform: uppercase;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--brand-gold);
+      letter-spacing: 0.5px;
     }
 
-    .google-rating-badge {
-      position: absolute;
-      bottom: 12px;
-      right: 14px;
-      background: rgba(18, 22, 34, 0.88);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 4px 8px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.75rem;
+    .thumb-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
       font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    /* Panel de Misión Activa (Gamificado) */
+    .active-mission-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 20px;
+      margin-top: 8px;
+      backdrop-filter: blur(20px);
+    }
+
+    .mission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .mission-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
       color: #fff;
     }
 
-    .google-rating-badge svg { width: 12px; height: 12px; fill: #f59e0b; }
-    .card-body { padding: 16px; }
+    .discount-callout {
+      background: linear-gradient(135deg, rgba(255, 199, 44, 0.15), rgba(255, 199, 44, 0.05));
+      border: 1px solid var(--brand-gold-glow);
+      color: var(--brand-gold);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-    .card-title-row {
+    /* Timeline Vertical de Pasos */
+    .timeline-steps {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-steps::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 12px;
+      bottom: 24px;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .step-node {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .step-node:last-child { margin-bottom: 0; }
+
+    .node-indicator {
+      position: absolute;
+      left: -28px;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #161C2A;
+      border: 2px solid var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .step-node.completed .node-indicator {
+      background: var(--brand-green);
+      border-color: var(--brand-green);
+      color: #080A0F;
+      box-shadow: 0 0 14px var(--brand-green-glow);
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .step-title-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       margin-bottom: 4px;
     }
 
-    .card-title { font-size: 1.05rem; font-weight: 700; color: #fff; }
-    .card-dist { font-size: 0.75rem; color: var(--accent); font-weight: 700; }
-
-    .google-address {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .card-benefit {
-      display: inline-block;
-      margin-bottom: 12px;
-      font-size: 0.72rem;
-      color: var(--gold);
-      background: rgba(245, 158, 11, 0.08);
-      border: 1px solid var(--gold-glow);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-
-    .actions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .btn-action {
-      background: linear-gradient(135deg, #10b981, #059669);
-      border: none;
-      color: #fff;
+    .step-name {
+      font-size: 0.9rem;
       font-weight: 700;
-      font-size: 0.78rem;
-      padding: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 16px var(--accent-glow);
-    }
-
-    .btn-maps {
-      background: rgba(66, 133, 244, 0.15);
-      border: 1px solid rgba(66, 133, 244, 0.3);
-      color: #93c5fd;
-      font-weight: 700;
-      font-size: 0.78rem;
-      padding: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-    }
-
-    .btn-action:active, .btn-maps:active { transform: scale(0.98); }
-
-    /* RED SOCIAL FEED */
-    .route-post-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 16px;
-      margin-bottom: 18px;
-      backdrop-filter: blur(16px);
-    }
-
-    .author-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .author-info { display: flex; align-items: center; gap: 10px; }
-    .author-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
-    .author-meta h4 { font-size: 0.85rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px; }
-    .author-meta span { font-size: 0.65rem; color: var(--text-muted); }
-
-    .tier-chip {
-      font-size: 0.6rem;
-      padding: 2px 7px;
-      border-radius: 999px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .tier-chip.embajador { background: rgba(245, 158, 11, 0.2); color: var(--gold); border: 1px solid var(--gold-glow); }
-    .tier-chip.cronista { background: rgba(6, 182, 212, 0.2); color: var(--cyan); border: 1px solid var(--cyan-glow); }
-    .tier-chip.baquiano { background: rgba(16, 185, 129, 0.2); color: var(--accent); border: 1px solid var(--accent-glow); }
-    .tier-chip.explorador { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
-
-    .btn-follow {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
+    }
+
+    .step-reward {
       font-size: 0.7rem;
+      color: var(--brand-green);
       font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 999px;
-      cursor: pointer;
     }
 
-    .btn-follow.following {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .route-post-img { width: 100%; height: 180px; border-radius: 14px; object-fit: cover; margin: 10px 0; }
-    .route-timeline-steps { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
-    .step-pill {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.65rem;
-      color: #e2e8f0;
-    }
-
-    .route-post-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      margin-top: 10px;
-    }
-
-    .btn-like {
-      background: none;
-      border: none;
+    .step-location {
+      font-size: 0.72rem;
       color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
       font-size: 0.75rem;
-      font-weight: 700;
+      color: #CBD5E1;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    /* Botones de Parada */
+    .step-actions {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      gap: 6px;
+    }
+
+    .btn-icon-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .btn-icon-link.ig {
+      background: rgba(255, 46, 99, 0.15);
+      border: 1px solid rgba(255, 46, 99, 0.3);
+      color: #FFA1B5;
+    }
+
+    .btn-icon-link.maps {
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: #8CE8FF;
+    }
+
+    .btn-checkin-step {
+      background: linear-gradient(135deg, var(--brand-green), #04B15A);
+      border: none;
+      color: #080A0F;
+      font-weight: 800;
+      font-size: 0.75rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 6px;
       cursor: pointer;
+      box-shadow: 0 4px 14px var(--brand-green-glow);
     }
 
-    .btn-like.liked { color: #ef4444; }
-    .btn-like.liked svg { fill: #ef4444; stroke: #ef4444; }
+    .btn-checkin-step.done {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      box-shadow: none;
+      cursor: default;
+    }
 
-    /* PERFIL SOCIAL */
+    /* Vista de Pasaporte & Perfil */
     .profile-hero {
-      background: linear-gradient(135deg, #161b26 0%, #0d1117 100%);
-      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, #161C2A 0%, #0D111A 100%);
+      border: 1px solid var(--border-subtle);
       border-radius: 24px;
       padding: 24px 20px;
       text-align: center;
       margin-bottom: 20px;
     }
 
-    .avatar-wrapper { position: relative; width: 90px; height: 90px; margin: 0 auto 12px; }
-    .avatar-profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
-    .avatar-edit-badge {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      background: var(--accent);
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: 2px solid #0d1117;
+    .avatar-wrap {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto 12px;
+      position: relative;
     }
 
-    .social-stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding: 12px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 16px;
-    }
-
-    .stat-item .num { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; }
-    .stat-item .label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; }
-
-    .level-meter { background: rgba(255, 255, 255, 0.05); border-radius: 999px; height: 8px; width: 100%; margin: 14px 0 8px; overflow: hidden; }
-    .level-fill { background: linear-gradient(90deg, var(--accent), var(--gold)); height: 100%; border-radius: 999px; transition: width 0.5s ease; }
-
-    .stamps-grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 12px; }
-    .stamp-box {
-      background: var(--card-bg);
-      border: 1px dashed var(--card-border);
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .stamp-box.unlocked { border: 1px solid var(--accent); background: rgba(16, 185, 129, 0.04); }
-    .stamp-icon { font-size: 1.6rem; margin-bottom: 6px; opacity: 0.3; filter: grayscale(1); }
-    .stamp-box.unlocked .stamp-icon { opacity: 1; filter: none; }
-    .stamp-name { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
-    .stamp-box.unlocked .stamp-name { color: #fff; }
-
-    /* Modales */
-    .route-modal, .qr-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .avatar-img {
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.92);
-      backdrop-filter: blur(20px);
-      z-index: 120;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--brand-green);
+      box-shadow: 0 0 24px var(--brand-green-glow);
     }
 
-    .route-modal.active, .qr-modal.active { display: flex; }
-
-    .modal-box {
-      width: 100%;
-      max-width: 380px;
-      background: #0d111a;
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 20px;
+    .savings-scoreboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
     }
 
-    .input-field {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 10px 12px;
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.8rem;
-      margin-bottom: 12px;
-      outline: none;
+    .score-item .val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--brand-green);
     }
 
-    .scanner-frame {
-      width: 250px;
-      height: 250px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      border-radius: 24px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .laser-line {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-      animation: scan 2s infinite ease-in-out;
-    }
-
-    @keyframes scan {
-      0% { top: 0%; }
-      50% { top: 96%; }
-      100% { top: 0%; }
+    .score-item .lbl {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     /* Barra Inferior */
-    .bottom-bar {
+    .nav-bar {
       position: fixed;
       bottom: 0;
       width: 100%;
       max-width: 440px;
-      height: 72px;
-      background: rgba(10, 13, 20, 0.9);
+      height: 74px;
+      background: rgba(10, 13, 20, 0.92);
       backdrop-filter: blur(24px);
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      z-index: 50;
-      padding: 0 10px;
+      z-index: 60;
+      padding: 0 16px;
     }
 
-    .nav-item {
+    .nav-btn {
       background: none;
       border: none;
       color: var(--text-muted);
@@ -652,755 +505,510 @@
       font-weight: 700;
       cursor: pointer;
       gap: 4px;
+      transition: color 0.2s;
     }
 
-    .nav-item.active { color: var(--accent); }
+    .nav-btn.active { color: var(--brand-green); }
 
-    .scan-nav-btn {
-      width: 54px;
-      height: 54px;
+    .nav-scan-btn {
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #059669);
-      border: 3px solid #07090e;
+      background: linear-gradient(135deg, var(--brand-green), #04B15A);
+      border: 3px solid #080A0F;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      transform: translateY(-14px);
-      box-shadow: 0 6px 20px var(--accent-glow);
+      color: #080A0F;
+      transform: translateY(-12px);
+      box-shadow: 0 8px 24px var(--brand-green-glow);
       cursor: pointer;
     }
 
-    .toast {
+    /* Modal QR */
+    .modal-overlay {
       position: fixed;
-      top: 20px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .scanner-box {
+      width: 250px;
+      height: 250px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .laser {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--brand-green);
+      box-shadow: 0 0 12px var(--brand-green);
+      animation: scanLaser 2s infinite ease-in-out;
+    }
+
+    @keyframes scanLaser {
+      0% { top: 0%; }
+      50% { top: 96%; }
+      100% { top: 0%; }
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      top: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: rgba(16, 185, 129, 0.95);
-      color: #fff;
+      background: var(--brand-green);
+      color: #080A0F;
       padding: 12px 24px;
       border-radius: 999px;
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 800;
       z-index: 200;
+      box-shadow: 0 10px 30px rgba(5, 223, 114, 0.4);
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-
-    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast-msg.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
 
-  <div class="toast" id="toastMsg">¡Check-in confirmado! +20 Puntos</div>
+  <div class="toast-msg" id="toast">¡Parada Verificada! +10% Desbloqueado</div>
 
-  <div class="app-viewport">
+  <div class="app-screen">
+    <!-- Header -->
     <header>
-      <div class="brand-group">
-        <h1>DESTINOS VEN</h1>
-        <div class="brand-sub">Guía & Red Aragua</div>
+      <div>
+        <h1 class="brand-title">DESTINOS VEN</h1>
+        <div class="brand-tag">Misión Aragua</div>
       </div>
-      <div class="status-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span class="pts" id="topPts">120 pts</span>
+      
+      <div class="header-stats">
+        <div class="stat-pill pill-savings">
+          <span>💰</span>
+          <span id="headerSavings">$18 Ahorrados</span>
+        </div>
+        <div class="stat-pill pill-xp">
+          <span>⚡</span>
+          <span id="headerXP">240 XP</span>
+        </div>
       </div>
     </header>
 
-    <!-- Vista 1: Destinos (Google Places Enriquecido) -->
-    <main class="view-container active" id="viewExplore">
+    <!-- Vista 1: Misiones de Fin de Semana (Home Principal) -->
+    <main class="view-content active" id="viewMissions">
       
-      <!-- Buscador en tiempo real -->
-      <div class="search-box">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="searchInput" placeholder="Buscar posadas, hoteles, playas, restaurantes..." oninput="handleSearch(this.value)">
-      </div>
-
-      <!-- Filtros por Categoría Google -->
-      <div class="category-scroll">
-        <button class="cat-btn active" onclick="filterByCategory('all', this)">📍 Todo Aragua</button>
-        <button class="cat-btn" onclick="filterByCategory('hospedaje', this)">🏨 Hoteles & Posadas</button>
-        <button class="cat-btn" onclick="filterByCategory('playa', this)">🏖️ Playas & Bahías</button>
-        <button class="cat-btn" onclick="filterByCategory('monumento', this)">🏛️ Monumentos</button>
-        <button class="cat-btn" onclick="filterByCategory('gastro', this)">🍴 Restaurantes</button>
-      </div>
-
-      <!-- Sincronización Google Places -->
-      <div class="google-sync-card">
-        <div class="google-pill">
-          <svg viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/>
-            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.4 7.33 24 12 24z"/>
-            <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.14 0 9.89 0 12s.45 3.86 1.24 5.42l4.04-3.13z"/>
-            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.6 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.93 6.72-4.93z"/>
-          </svg>
-          Google Places API Conectada
+      <div class="weekend-hero">
+        <div class="hero-badge">
+          <span>🔥</span> Misión Sábado & Domingo
         </div>
-        <div class="gps-state" id="userGpsStatus">📍 GPS Aragua Activo</div>
+        <h2 class="hero-title">Elige tu Ruta y Ahorra 10% en Aliados</h2>
+        <p class="hero-desc">Completa 3 paradas este fin de semana, desbloquea recompensas en caja y escala de nivel.</p>
       </div>
 
-      <!-- Radar Aéreo -->
-      <section class="flight-terminal-banner">
-        <div class="terminal-header">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
-            <div>
-              <div style="font-size:0.8rem; font-weight:700; color:#fff;">Aeropuerto Los Tacariguas</div>
-              <div style="font-size:0.62rem; color:var(--text-muted);">Maracay (MYC) — En directo</div>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px; font-size:0.65rem; color:var(--cyan); font-weight:800;">
-            <span class="pulse-dot"></span> Radar Activo
+      <!-- Selector Visual de Rutas -->
+      <div class="route-selector-scroll">
+        <!-- Ruta 1: Ciudad -->
+        <div class="route-card-thumb selected" id="thumb-ciudad" onclick="selectMission('ciudad')">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80" alt="Maracay Urbano">
+          <div class="thumb-info">
+            <span class="thumb-tag">1 Día</span>
+            <div class="thumb-title">Maracay Gastro</div>
           </div>
         </div>
 
-        <div class="flight-toggle-row">
-          <button class="flight-toggle-btn active" id="btnDepartures" onclick="renderFlightList('departures')">Salidas</button>
-          <button class="flight-toggle-btn" id="btnArrivals" onclick="renderFlightList('arrivals')">Llegadas</button>
+        <!-- Ruta 2: Colonia Tovar -->
+        <div class="route-card-thumb" id="thumb-tovar" onclick="selectMission('tovar')">
+          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=400&q=80" alt="Colonia Tovar">
+          <div class="thumb-info">
+            <span class="thumb-tag">Montaña</span>
+            <div class="thumb-title">Escape Selva Negra</div>
+          </div>
         </div>
-        <div id="flightListContainer"></div>
+
+        <!-- Ruta 3: Costa -->
+        <div class="route-card-thumb" id="thumb-costa" onclick="selectMission('costa')">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Choroní y Cata">
+          <div class="thumb-info">
+            <span class="thumb-tag">Playas</span>
+            <div class="thumb-title">Caribe & Cacao</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Interactiva de la Misión Seleccionada -->
+      <section class="active-mission-box" id="activeMissionBox">
+        <!-- Renderizado dinámicamente -->
       </section>
 
-      <!-- Catálogo de Destinos -->
-      <div id="destinationsList"></div>
     </main>
 
-    <!-- Vista 2: Comunidad Social -->
-    <main class="view-container" id="viewFeed">
-      <button class="btn-action" style="width:100%; margin-bottom:16px; padding:12px;" onclick="openCreateRouteModal()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Publicar Mi Ruta en Aragua (+80 pts)
-      </button>
-
-      <div style="font-family:'Space Grotesk'; font-size:0.95rem; font-weight:700; color:#fff; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-        <span>Bitácora de Viajeros</span>
-        <span style="font-size:0.7rem; color:var(--accent);">● En Vivo</span>
+    <!-- Vista 2: Comunidad & Rutas -->
+    <main class="view-content" id="viewCommunity">
+      <div style="font-family:'Space Grotesk'; font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:14px;">
+        Viajeros Explorando Aragua
+      </div>
+      
+      <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:16px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid var(--brand-green);">
+            <div>
+              <div style="font-size:0.8rem; font-weight:700;">Valeria Mendoza</div>
+              <div style="font-size:0.65rem; color:var(--brand-gold);">Nivel 3: Cronista</div>
+            </div>
+          </div>
+          <span style="font-size:0.7rem; color:var(--brand-green); font-weight:700;">Ahorró $14 en La Felicittà</span>
+        </div>
+        <p style="font-size:0.75rem; color:#CBD5E1; line-height:1.4;">"Increíble la ruta gastronómica por La Floresta. Escaneamos en mesa y el 10% se aplicó directo en la factura de la pizza. ¡Súper rápido!"</p>
       </div>
 
-      <div id="socialFeedContainer"></div>
+      <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid var(--brand-cyan);">
+            <div>
+              <div style="font-size:0.8rem; font-weight:700;">Carlos Henríquez</div>
+              <div style="font-size:0.65rem; color:var(--brand-cyan);">Nivel 2: Baquiano</div>
+            </div>
+          </div>
+          <span style="font-size:0.7rem; color:var(--brand-green); font-weight:700;">Ahorró $22 en Bergland</span>
+        </div>
+        <p style="font-size:0.75rem; color:#CBD5E1; line-height:1.4;">"Hicimos la ruta de la Colonia Tovar el sábado. El clima perfecto y el café artesanal de cortesía fue el mejor toque."</p>
+      </div>
     </main>
 
-    <!-- Vista 3: Mi Perfil & Pasaporte -->
-    <main class="view-container" id="viewPassport">
+    <!-- Vista 3: Mi Pasaporte Digital -->
+    <main class="view-content" id="viewPassport">
       <div class="profile-hero">
-        <div class="avatar-wrapper">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Avatar" class="avatar-profile-img" id="userAvatarImg">
-          <div class="avatar-edit-badge" onclick="changeUserAvatar()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <div class="avatar-wrap">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Jesús Chacón" class="avatar-img">
+        </div>
+        <h3 style="font-family:'Space Grotesk'; font-size:1.25rem; font-weight:800; color:#fff;">Jesús Chacón</h3>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:12px;">@jesuschacon • Maracay, Aragua</p>
+
+        <!-- Marcador de Ahorro y Nivel -->
+        <div class="savings-scoreboard">
+          <div class="score-item">
+            <div class="val" id="profileSavingsDisplay">$18.00</div>
+            <div class="lbl">Ahorro con Destinos Ven</div>
+          </div>
+          <div class="score-item">
+            <div class="val" id="profileXPDisplay">240 XP</div>
+            <div class="lbl">Puntos de Estatus</div>
           </div>
         </div>
-        <div style="font-family:'Space Grotesk'; font-size:1.3rem; font-weight:700; color:#fff;" id="profileNameDisplay">Jesús Chacón</div>
-        <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">@jesuschacon • Aragua, VE</div>
-        <div style="font-size:0.78rem; color:#cbd5e1; max-width:280px; margin:0 auto 16px; line-height:1.4;">
-          Audiovisual & viajero. Documentando las posadas coloniales y playas vírgenes de Aragua.
-        </div>
 
-        <div class="social-stats-row">
-          <div class="stat-item"><div class="num" id="statRoutesCount">2</div><div class="label">Rutas</div></div>
-          <div class="stat-item"><div class="num">1.4K</div><div class="label">Seguidores</div></div>
-          <div class="stat-item"><div class="num">380</div><div class="label">Siguiendo</div></div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-          <span style="font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:800;" id="cardTier">NIVEL 1: EXPLORADOR</span>
-          <span style="font-family:'Space Grotesk'; font-size:1.1rem; font-weight:700; color:var(--accent);" id="passportPts">120 PTS</span>
-        </div>
-        
-        <div class="level-meter"><div class="level-fill" id="meterFill" style="width: 24%;"></div></div>
-        <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted);">
-          <span>Próximo Rango: Baquiano</span>
-          <span id="tierTarget">120 / 500</span>
-        </div>
-      </div>
-
-      <div style="font-family:'Space Grotesk'; font-size:0.9rem; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px; font-weight:700;">
-        Sellos de Expedición Aragua
-      </div>
-      <div class="stamps-grid">
-        <div class="stamp-box" id="stamp-maracay">
-          <div class="stamp-icon">🏨</div>
-          <div class="stamp-name">Maracay Urbano</div>
-          <div style="font-size:0.6rem; color: var(--text-muted); margin-top:2px;" id="stamp-maracay-txt">Pendiente</div>
-        </div>
-        <div class="stamp-box" id="stamp-tovar">
-          <div class="stamp-icon">🌲</div>
-          <div class="stamp-name">Colonia Tovar</div>
-          <div style="font-size:0.6rem; color: var(--text-muted); margin-top:2px;" id="stamp-tovar-txt">Pendiente</div>
-        </div>
-        <div class="stamp-box" id="stamp-costa">
-          <div class="stamp-icon">🌊</div>
-          <div class="stamp-name">Costas & Playas</div>
-          <div style="font-size:0.6rem; color: var(--text-muted); margin-top:2px;" id="stamp-costa-txt">Pendiente</div>
-        </div>
-        <div class="stamp-box" id="stamp-flight">
-          <div class="stamp-icon">✈️</div>
-          <div class="stamp-name">Alas de Aragua</div>
-          <div style="font-size:0.6rem; color: var(--text-muted); margin-top:2px;" id="stamp-flight-txt">Pendiente</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; font-weight:700;">
+          <span style="color:var(--brand-gold);">RANGO: EXPLORADOR VIP</span>
+          <span style="color:var(--text-muted);">Próximo: Baquiano</span>
         </div>
       </div>
     </main>
 
-    <!-- Modal Crear Ruta -->
-    <div class="route-modal" id="routeModal">
-      <div class="modal-box">
-        <div style="font-family:'Space Grotesk'; font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:14px;">Publicar Nueva Ruta</div>
-        <input type="text" class="input-field" id="newRouteTitle" placeholder="Título (ej: De la Bahía de Cata al Henri Pittier)">
-        <input type="text" class="input-field" id="newRouteStops" placeholder="Paradas separadas por coma (ej: Bahía de Cata, Cacao Bistro)">
-        <input type="text" class="input-field" id="newRouteTime" placeholder="Duración (ej: 2 días / 1 noche)">
-        <textarea class="input-field" id="newRouteDesc" rows="3" placeholder="Tips de viaje, cómo llegar y recomendaciones..."></textarea>
-        
-        <button class="btn-action" style="width:100%; margin-top:6px;" onclick="publishCustomRoute()">
-          Publicar y Ganar +80 Pts
-        </button>
-        <button onclick="closeCreateRouteModal()" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:12px; font-size:0.75rem; cursor:pointer;">
-          Cancelar
-        </button>
+    <!-- Modal Escáner QR de Consumo -->
+    <div class="modal-overlay" id="qrModal">
+      <div style="color:#fff; font-family:'Space Grotesk'; font-size:1.1rem; font-weight:800; margin-bottom:20px;">
+        ESCANEAR EN EL COMERCIO
       </div>
-    </div>
-
-    <!-- Modal QR -->
-    <div class="qr-modal" id="qrModal">
-      <div style="color: #fff; font-size: 0.9rem; font-weight: 700; margin-bottom: 20px;">ESCANEAR QR DE CONSUMO</div>
-      <div class="scanner-frame">
-        <div class="laser-line"></div>
+      <div class="scanner-box">
+        <div class="laser"></div>
         <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M7 17h.01M17 7h.01M17 17h.01"/></svg>
       </div>
-      <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 18px; text-align: center; max-width: 240px;">
-        Apunta al código QR del comercio o monumento para sumar tus puntos.
+      <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; max-width:240px; margin-bottom:20px;">
+        Apunta al código QR en la mesa o barra de <strong>La Felicittà</strong> o aliado para validar tu 10% OFF.
       </p>
-      <button class="btn-action" style="margin-top: 24px; max-width: 200px;" onclick="simulateQrRead()">
-        Simular Lectura (+50 pts)
+      <button class="btn-checkin-step" style="padding:12px 24px; font-size:0.85rem;" onclick="simulateQrDiscount()">
+        Validar 10% de Descuento
       </button>
-      <button onclick="closeScanner()" style="background:none; border:none; color:var(--text-muted); margin-top: 14px; font-size: 0.75rem; cursor:pointer;">
+      <button onclick="closeScanner()" style="background:none; border:none; color:var(--text-muted); margin-top:14px; font-size:0.75rem; cursor:pointer;">
         Cerrar
       </button>
     </div>
 
-    <!-- Barra Inferior -->
-    <nav class="bottom-bar">
-      <button class="nav-item active" id="tabNavExplore" onclick="switchView('viewExplore', this)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        Destinos
+    <!-- Navegación Inferior Limpia -->
+    <nav class="nav-bar">
+      <button class="nav-btn active" id="tabMissions" onclick="switchTab('viewMissions', this)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Misiones
       </button>
 
-      <button class="nav-item" id="tabNavFeed" onclick="switchView('viewFeed', this)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        Comunidad
-      </button>
-
-      <button class="scan-nav-btn" onclick="openScanner()">
+      <button class="nav-scan-btn" onclick="openScanner()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       </button>
 
-      <button class="nav-item" id="tabNavPassport" onclick="switchView('viewPassport', this)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Mi Perfil
+      <button class="nav-btn" id="tabCommunity" onclick="switchTab('viewCommunity', this)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Comunidad
+      </button>
+
+      <button class="nav-btn" id="tabPassport" onclick="switchTab('viewPassport', this)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Pasaporte
       </button>
     </nav>
   </div>
 
   <script>
-    let userPoints = 120;
-    const unlockedStamps = new Set();
-    let userCoords = null;
-    let currentCategoryFilter = 'all';
+    // ESTADO GENERAL DE LA APLICACIÓN
+    let userSavings = 18.0;
+    let userXP = 240;
+    let selectedRouteKey = 'ciudad';
 
-    // BASE DE DATOS DE GOOGLE PLACES: HOTELES, POSADAS, RESTAURANTES, MONUMENTOS Y PLAYAS DE ARAGUA
-    const allAraguaPlaces = [
-      // HOTELES & RESORTS
-      {
-        id: 'place_mcy_golf',
-        name: 'Marriott Maracay Golf Resort',
-        category: 'hospedaje',
-        tag: 'Hotel 5 Estrellas & Golf',
-        googleRating: 4.6,
-        googleReviewsCount: 2180,
-        address: 'Av. Las Delicias, Final El Castaño, Maracay',
-        lat: 10.2921,
-        lng: -67.5960,
-        googleMapsUrl: 'https://maps.google.com/?q=Marriott+Maracay+Golf+Resort',
-        benefit: 'Nivel 2+: 10% OFF en DayPass & Restaurante',
-        img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'maracay'
-      },
-      {
-        id: 'place_euro_mcy',
-        name: 'Eurobuilding Express Maracay',
-        category: 'hospedaje',
-        tag: 'Hotel Ejecutivo',
-        googleRating: 4.5,
-        googleReviewsCount: 1980,
-        address: 'Av. Intercomunal Maracay - Turmero',
-        lat: 10.2355,
-        lng: -67.5742,
-        googleMapsUrl: 'https://maps.google.com/?q=Eurobuilding+Express+Maracay',
-        benefit: 'Nivel 2+: Late Check-out sin cargo',
-        img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'maracay'
-      },
-      // POSADAS EXCLUSIVAS
-      {
-        id: 'place_cacaoni_lodge',
-        name: 'Posada Cacaoni Lodge',
-        category: 'hospedaje',
-        tag: 'Posada Boutique de Lujo',
-        googleRating: 4.8,
-        googleReviewsCount: 640,
-        address: 'Sector El Portete, Puerto Colombia, Choroní',
-        lat: 10.5015,
-        lng: -67.6041,
-        googleMapsUrl: 'https://maps.google.com/?q=Posada+Cacaoni+Lodge+Choroni',
-        benefit: 'Nivel 2+: Cóctel de bienvenida de cacao + 10% Hospedaje',
-        img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'costa'
-      },
-      {
-        id: 'place_bergland_tovar',
-        name: 'Hotel & Posada Bergland',
-        category: 'hospedaje',
-        tag: 'Posada de Tradición Alemana',
-        googleRating: 4.7,
-        googleReviewsCount: 890,
-        address: 'Sector El Rincón, Colonia Tovar',
-        lat: 10.4072,
-        lng: -67.2885,
-        googleMapsUrl: 'https://maps.google.com/?q=Hotel+Bergland+Colonia+Tovar',
-        benefit: 'Nivel 2+: Desayuno artesanal y café de cortesía',
-        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'tovar'
-      },
-      // PLAYAS & COSTAS
-      {
-        id: 'place_bahia_cata',
-        name: 'Bahía de Cata & Catica',
-        category: 'playa',
-        tag: 'Playa Emblemática / Costa',
-        googleRating: 4.7,
-        googleReviewsCount: 4210,
-        address: 'Cata, Ocumare de la Costa de Oro',
-        lat: 10.4905,
-        lng: -67.7348,
-        googleMapsUrl: 'https://maps.google.com/?q=Bahia+de+Cata+Aragua',
-        benefit: 'Nivel 2+: 15% OFF en toldos y lanchas aliadas a Catica',
-        img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'costa'
-      },
-      {
-        id: 'place_la_cienaga',
-        name: 'La Ciénaga de Ocumare',
-        category: 'playa',
-        tag: 'Piscina Natural & Kayak',
-        googleRating: 4.9,
-        googleReviewsCount: 1650,
-        address: 'Parque Nacional Henri Pittier, Ocumare',
-        lat: 10.4862,
-        lng: -67.7980,
-        googleMapsUrl: 'https://maps.google.com/?q=La+Cienaga+Ocumare+Aragua',
-        benefit: 'Nivel 2+: Snorkel incluido en tu traslado en lancha',
-        img: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'costa'
-      },
-      // MONUMENTOS & SITIOS CULTURALES
-      {
-        id: 'place_tom_maracay',
-        name: 'Teatro de la Ópera de Maracay (TOM)',
-        category: 'monumento',
-        tag: 'Patrimonio Cultural',
-        googleRating: 4.8,
-        googleReviewsCount: 3120,
-        address: 'Calle Miranda con Av. Bolívar, Centro de Maracay',
-        lat: 10.2505,
-        lng: -67.5968,
-        googleMapsUrl: 'https://maps.google.com/?q=Teatro+de+la+Opera+de+Maracay',
-        benefit: 'Nivel 2+: Visita guiada histórica + 20 pts de Check-in',
-        img: 'https://images.unsplash.com/photo-1514306191717-452ec28c7814?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'maracay'
-      },
-      {
-        id: 'place_iglesia_tovar',
-        name: 'Iglesia San Martín de Tours',
-        category: 'monumento',
-        tag: 'Monumento Histórico 1862',
-        googleRating: 4.8,
-        googleReviewsCount: 2450,
-        address: 'Centro Histórico de la Colonia Tovar',
-        lat: 10.4061,
-        lng: -67.2880,
-        googleMapsUrl: 'https://maps.google.com/?q=Iglesia+San+Martin+de+Tours+Colonia+Tovar',
-        benefit: 'Nivel 2+: Insignia especial "Raíces Selva Negra"',
-        img: 'https://images.unsplash.com/photo-1548625361-16a75f974e64?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'tovar'
-      },
-      // RESTAURANTES & GASTRONOMÍA
-      {
-        id: 'place_cacao_brasas',
-        name: 'Cacao & Brasas Bistro',
-        category: 'gastro',
-        tag: 'Cocina de Autor & Carnes',
-        googleRating: 4.6,
-        googleReviewsCount: 780,
-        address: 'Av. Las Delicias, Sector La Soledad, Maracay',
-        lat: 10.2630,
-        lng: -67.5940,
-        googleMapsUrl: 'https://maps.google.com/?q=La+Soledad+Maracay+Restaurantes',
-        benefit: 'Nivel 2+: Postre de la casa por consumo de plato fuerte',
-        img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'maracay'
-      }
-    ];
-
-    // FEED SOCIAL
-    let communityRoutes = [
-      {
-        id: 'route_1',
-        author: 'Valeria Mendoza',
-        handle: '@valeriatours',
-        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
-        tier: 'embajador',
-        tierLabel: 'Nivel 4: Embajador',
-        isFollowing: false,
-        title: 'Travesía Costera Secreta: De Maracay a Chuao',
-        time: '3 Días',
-        desc: 'Salida temprano por el Henri Pittier, parada en Las Delicias y directo a Puerto Colombia. La Posada Cacaoni Lodge ofrece gran atención mostrando el estatus en la app.',
-        img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-        stops: ['Maracay', 'Henri Pittier', 'Puerto Colombia', 'Chuao'],
-        likes: 142,
-        isLiked: false
-      },
-      {
-        id: 'route_2',
-        author: 'Carlos Henriquez',
-        handle: '@carlos_tovar',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-        tier: 'cronista',
-        tierLabel: 'Nivel 3: Cronista',
-        isFollowing: true,
-        title: 'Ruta de Neblina & Gastronomía en Tovar',
-        time: '1 Día',
-        desc: 'Visita a la Iglesia San Martín de Tours y almuerzo en Bergland. Clima templado y paisaje de montaña.',
-        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
-        stops: ['Iglesia San Martín', 'Posada Bergland', 'Centro Tovar'],
-        likes: 89,
-        isLiked: false
-      }
-    ];
-
-    // CÁLCULO DE DISTANCIA HAVERSINE
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dLon/2) * Math.sin(dLon/2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-      return (R * c).toFixed(1);
-    }
-
-    // GEOLOCALIZACIÓN
-    function initUserLocation() {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            userCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-            document.getElementById('userGpsStatus').innerText = '📍 GPS Aragua Activo';
-            renderDestinations(allAraguaPlaces);
+    // DEFINICIÓN DE LAS 3 RUTAS DEL FIN DE SEMANA
+    const weekendRoutes = {
+      ciudad: {
+        title: "Ruta 1: Sabores & Noche Urbana",
+        location: "Maracay (La Floresta / El Castaño)",
+        discountText: "10% OFF en Aliados",
+        rewardXP: "+120 XP",
+        steps: [
+          {
+            id: 'c1',
+            num: '1',
+            title: 'Golden Hour & Cultura',
+            place: 'Teatro de la Ópera de Maracay (TOM)',
+            desc: 'Check-in fotográfico en la fachada histórica antes de iniciar tu circuito de cena.',
+            reward: '+20 XP',
+            mapsUrl: 'https://maps.google.com/?q=Teatro+de+la+Opera+de+Maracay',
+            igUrl: 'https://www.instagram.com/teatrooperamcy',
+            completed: true
           },
-          () => { renderDestinations(allAraguaPlaces); }
-        );
-      } else {
-        renderDestinations(allAraguaPlaces);
+          {
+            id: 'c2',
+            num: '2',
+            title: 'Cena Gourmet & Vinos',
+            place: 'Restaurante La Felicittà',
+            desc: 'Urb. La Floresta. Escanea el código en mesa y obtén 10% directo en pizzas artesanales y pastas.',
+            reward: '10% OFF + 50 XP',
+            mapsUrl: 'https://maps.google.com/?q=La+Felicitta+Maracay',
+            igUrl: 'https://www.instagram.com/lafelicittamcy',
+            completed: false
+          },
+          {
+            id: 'c3',
+            num: '3',
+            title: 'Brindis & Noche de Cierre',
+            place: 'Marriott Maracay Golf Resort',
+            desc: 'Parada en el Lounge Bar al final de Las Delicias con 10% en tu primera ronda de cocteles.',
+            reward: '10% OFF + 50 XP',
+            mapsUrl: 'https://maps.google.com/?q=Marriott+Maracay+Golf+Resort',
+            igUrl: 'https://www.instagram.com/marriottmaracay',
+            completed: false
+          }
+        ]
+      },
+      tovar: {
+        title: "Ruta 2: El Escape de Neblina",
+        location: "Colonia Tovar (Centro Histórico & El Rincón)",
+        discountText: "10% en Comida & Posada",
+        rewardXP: "+150 XP",
+        steps: [
+          {
+            id: 't1',
+            num: '1',
+            title: 'Punto de Encuentro Histórico',
+            place: 'Iglesia San Martín de Tours',
+            desc: 'Check-in en la emblemática plaza colonial fundada en 1843 por los colonos alemanes.',
+            reward: '+30 XP',
+            mapsUrl: 'https://maps.google.com/?q=Iglesia+San+Martin+de+Tours+Colonia+Tovar',
+            igUrl: 'https://www.instagram.com/explore/tags/coloniatovar',
+            completed: false
+          },
+          {
+            id: 't2',
+            num: '2',
+            title: 'Almuerzo Selva Negra',
+            place: 'Posada & Restaurant Bergland',
+            desc: 'Sector El Rincón. Salchichas alemanas, fondue y cervezas artesanales con 10% de descuento.',
+            reward: '10% OFF + 60 XP',
+            mapsUrl: 'https://maps.google.com/?q=Hotel+Bergland+Colonia+Tovar',
+            igUrl: 'https://www.instagram.com/hotelbergland',
+            completed: false
+          },
+          {
+            id: 't3',
+            num: '3',
+            title: 'Dulce de Montaña',
+            place: 'Chocolatería Artesanal Tovar',
+            desc: 'Fresas con crema y chocolates con café de cortesía al completar la misión.',
+            reward: 'Cortesía + 60 XP',
+            mapsUrl: 'https://maps.google.com/?q=Colonia+Tovar',
+            igUrl: 'https://www.instagram.com/explore/tags/coloniatovar',
+            completed: false
+          }
+        ]
+      },
+      costa: {
+        title: "Ruta 3: Caribe & Cacao",
+        location: "Choroní & Bahía de Cata",
+        discountText: "10% en Lanchas & Hospedaje",
+        rewardXP: "+160 XP",
+        steps: [
+          {
+            id: 'k1',
+            num: '1',
+            title: 'Cruce del Parque Henri Pittier',
+            place: 'Mirador Las Cocuizas',
+            desc: 'Inicia el viaje por la montaña con café caliente y check-in antes de bajar al mar.',
+            reward: '+20 XP',
+            mapsUrl: 'https://maps.google.com/?q=Parque+Nacional+Henri+Pittier',
+            igUrl: 'https://www.instagram.com/explore/tags/henripittier',
+            completed: false
+          },
+          {
+            id: 'k2',
+            num: '2',
+            title: 'Día de Sol & Bahía',
+            place: 'Bahía de Cata / Catica',
+            desc: '10% de descuento en alquiler de toldos y traslado en lancha con pescadores aliados.',
+            reward: '10% OFF + 70 XP',
+            mapsUrl: 'https://maps.google.com/?q=Bahia+de+Cata',
+            igUrl: 'https://www.instagram.com/explore/tags/bahiadecata',
+            completed: false
+          },
+          {
+            id: 'k3',
+            num: '3',
+            title: 'Atardecer & Hospedaje Boutique',
+            place: 'Posada Cacaoni Lodge (Choroní)',
+            desc: 'Cóctel artesanal de cacao de bienvenida + 10% de descuento en tu estadía o cena.',
+            reward: '10% OFF + 70 XP',
+            mapsUrl: 'https://maps.google.com/?q=Posada+Cacaoni+Lodge+Choroni',
+            igUrl: 'https://www.instagram.com/cacaonilodge',
+            completed: false
+          }
+        ]
       }
-    }
-
-    // RENDERIZAR LUGARES DE GOOGLE
-    function renderDestinations(items) {
-      const list = document.getElementById('destinationsList');
-      if (items.length === 0) {
-        list.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-size:0.8rem;">No se encontraron destinos para esta búsqueda.</div>`;
-        return;
-      }
-
-      list.innerHTML = items.map(d => {
-        let distText = '● GPS Listo';
-        if (userCoords) {
-          const km = calculateDistance(userCoords.lat, userCoords.lng, d.lat, d.lng);
-          distText = `A ${km} km`;
-        }
-
-        return `
-          <article class="destination-card">
-            <div class="card-img-wrap">
-              <span class="card-tag">${d.tag}</span>
-              <img src="${d.img}" alt="${d.name}" loading="lazy">
-              <div class="google-rating-badge">
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>${d.googleRating}</span>
-                <span style="color:var(--text-muted); font-size:0.65rem;">(${d.googleReviewsCount})</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-title-row">
-                <h2 class="card-title">${d.name}</h2>
-                <span class="card-dist">${distText}</span>
-              </div>
-              <div class="google-address">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                ${d.address}
-              </div>
-              <div class="card-benefit">${d.benefit}</div>
-              <div class="actions-grid">
-                <a href="${d.googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="btn-maps">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                  Google Maps
-                </a>
-                <button class="btn-action" onclick="executeCheckin('${d.name}', '${d.stampKey}')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  Check-in (+20)
-                </button>
-              </div>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    // FILTRO POR CATEGORÍA
-    function filterByCategory(cat, btn) {
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCategoryFilter = cat;
-
-      if (cat === 'all') {
-        renderDestinations(allAraguaPlaces);
-      } else {
-        renderDestinations(allAraguaPlaces.filter(p => p.category === cat));
-      }
-    }
-
-    // BUSCADOR EN VIVO
-    function handleSearch(query) {
-      const q = query.toLowerCase().trim();
-      const filtered = allAraguaPlaces.filter(p => {
-        const matchesCategory = currentCategoryFilter === 'all' || p.category === currentCategoryFilter;
-        const matchesText = p.name.toLowerCase().includes(q) || p.address.toLowerCase().includes(q) || p.tag.toLowerCase().includes(q);
-        return matchesCategory && matchesText;
-      });
-      renderDestinations(filtered);
-    }
-
-    // RADAR DE VUELOS
-    const flightData = {
-      departures: [
-        { code: 'V0-1420', airline: 'Conviasa / Chárter', destination: 'Los Roques (SVRS)', time: '07:30 AM', status: 'En Hora', class: 'status-on-time' },
-        { code: 'ALB-302', airline: 'Albatros Air', destination: 'Porlamar / Margarita (PMV)', time: '09:15 AM', status: 'Abordando', class: 'status-boarding' }
-      ],
-      arrivals: [
-        { code: 'V0-1421', airline: 'Conviasa / Chárter', origin: 'Los Roques (SVRS)', time: '04:45 PM', status: 'En Vuelo', class: 'status-on-time' }
-      ]
     };
 
-    function renderFlightList(type) {
-      const container = document.getElementById('flightListContainer');
-      const btnDep = document.getElementById('btnDepartures');
-      const btnArr = document.getElementById('btnArrivals');
+    // RENDERIZAR LA RUTA SELECCIONADA
+    function renderSelectedMission() {
+      const data = weekendRoutes[selectedRouteKey];
+      const box = document.getElementById('activeMissionBox');
 
-      if (type === 'departures') {
-        btnDep.classList.add('active');
-        btnArr.classList.remove('active');
-        container.innerHTML = flightData.departures.map(f => `
-          <div class="flight-item">
-            <div>
-              <div class="flight-code">${f.code} <span style="font-size:0.65rem; color:var(--cyan); font-weight:400;">${f.airline}</span></div>
-              <div style="font-size:0.7rem; color:var(--text-muted);">A: <strong>${f.destination}</strong> • ${f.time}</div>
-            </div>
-            <span class="flight-status ${f.class}">${f.status}</span>
+      box.innerHTML = `
+        <div class="mission-header">
+          <div>
+            <h3 class="mission-name">${data.title}</h3>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">📍 ${data.location}</div>
           </div>
-        `).join('');
-      } else {
-        btnArr.classList.add('active');
-        btnDep.classList.remove('active');
-        container.innerHTML = flightData.arrivals.map(f => `
-          <div class="flight-item">
-            <div>
-              <div class="flight-code">${f.code} <span style="font-size:0.65rem; color:var(--cyan); font-weight:400;">${f.airline}</span></div>
-              <div style="font-size:0.7rem; color:var(--text-muted);">De: <strong>${f.origin}</strong> • ${f.time}</div>
-            </div>
-            <span class="flight-status ${f.class}">${f.status}</span>
+          <div class="discount-callout">
+            <span>🏷️</span> ${data.discountText}
           </div>
-        `).join('');
-      }
-    }
+        </div>
 
-    // SOCIAL FEED
-    function renderSocialFeed() {
-      const container = document.getElementById('socialFeedContainer');
-      container.innerHTML = communityRoutes.map(r => `
-        <article class="route-post-card">
-          <div class="author-row">
-            <div class="author-info">
-              <img src="${r.avatar}" class="author-avatar" alt="${r.author}">
-              <div class="author-meta">
-                <h4>
-                  ${r.author}
-                  <span class="tier-chip ${r.tier}">${r.tierLabel}</span>
-                </h4>
-                <span>${r.handle} • ${r.time}</span>
+        <div class="timeline-steps">
+          ${data.steps.map(s => `
+            <div class="step-node ${s.completed ? 'completed' : ''}" id="step-${s.id}">
+              <div class="node-indicator">${s.completed ? '✓' : s.num}</div>
+              <div class="step-card">
+                <div class="step-title-row">
+                  <div class="step-name">${s.place}</div>
+                  <div class="step-reward">${s.reward}</div>
+                </div>
+                <div class="step-location">${s.title}</div>
+                <p class="step-desc">${s.desc}</p>
+                
+                <div class="step-actions">
+                  <a href="${s.igUrl}" target="_blank" rel="noopener" class="btn-icon-link ig" title="Ver Instagram">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  </a>
+                  <a href="${s.mapsUrl}" target="_blank" rel="noopener" class="btn-icon-link maps" title="Abrir Maps">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  </a>
+                  <button class="btn-checkin-step ${s.completed ? 'done' : ''}" onclick="completeStep('${s.id}', '${s.place}')">
+                    ${s.completed ? '✓ Completado' : 'Validar Parada'}
+                  </button>
+                </div>
               </div>
             </div>
-            <button class="btn-follow ${r.isFollowing ? 'following' : ''}" onclick="toggleFollow('${r.id}')">
-              ${r.isFollowing ? 'Siguiendo' : '+ Seguir'}
-            </button>
-          </div>
-
-          <h3 style="font-size:0.95rem; color:#fff; font-weight:700; margin-bottom:6px;">${r.title}</h3>
-          <p style="font-size:0.75rem; color:#cbd5e1; line-height:1.4;">${r.desc}</p>
-          <img src="${r.img}" class="route-post-img" alt="${r.title}">
-
-          <div class="route-timeline-steps">
-            ${r.stops.map((s, idx) => `
-              <span class="step-pill">
-                <span style="color:var(--accent); font-weight:700;">${idx+1}.</span>${s}
-              </span>
-            `).join('')}
-          </div>
-
-          <div class="route-post-footer">
-            <button class="btn-like ${r.isLiked ? 'liked' : ''}" onclick="toggleLike('${r.id}')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              <span>${r.likes} Inspirados</span>
-            </button>
-            <button class="btn-action" style="padding:6px 12px; font-size:0.7rem;" onclick="showToast('¡Ruta guardada en tu perfil!')">
-              Hacer esta Ruta
-            </button>
-          </div>
-        </article>
-      `).join('');
+          `).join('')}
+        </div>
+      `;
     }
 
-    function toggleFollow(id) {
-      const r = communityRoutes.find(x => x.id === id);
-      if (r) {
-        r.isFollowing = !r.isFollowing;
-        showToast(r.isFollowing ? `Siguiendo a ${r.author}` : `Dejaste de seguir a ${r.author}`);
-        renderSocialFeed();
+    // CAMBIAR DE RUTA
+    function selectMission(key) {
+      selectedRouteKey = key;
+      document.querySelectorAll('.route-card-thumb').forEach(c => c.classList.remove('selected'));
+      document.getElementById(`thumb-${key}`).classList.add('selected');
+      renderSelectedMission();
+    }
+
+    // COMPLETAR PARADA
+    function completeStep(stepId, placeName) {
+      const route = weekendRoutes[selectedRouteKey];
+      const step = route.steps.find(s => s.id === stepId);
+
+      if (step && !step.completed) {
+        step.completed = true;
+        userSavings += 6.5;
+        userXP += 40;
+        updateUserScores();
+        showToast(`¡Parada validada en ${placeName}! +10% aplicado`);
+        renderSelectedMission();
       }
     }
 
-    function toggleLike(id) {
-      const r = communityRoutes.find(x => x.id === id);
-      if (r) {
-        r.isLiked = !r.isLiked;
-        r.likes += r.isLiked ? 1 : -1;
-        renderSocialFeed();
-      }
+    function updateUserScores() {
+      document.getElementById('headerSavings').innerText = `$${userSavings.toFixed(0)} Ahorrados`;
+      document.getElementById('headerXP').innerText = `${userXP} XP`;
+      document.getElementById('profileSavingsDisplay').innerText = `$${userSavings.toFixed(2)}`;
+      document.getElementById('profileXPDisplay').innerText = `${userXP} XP`;
     }
 
-    function openCreateRouteModal() { document.getElementById('routeModal').classList.add('active'); }
-    function closeCreateRouteModal() { document.getElementById('routeModal').classList.remove('active'); }
+    // ESCÁNER QR
+    function openScanner() { document.getElementById('qrModal').classList.add('active'); }
+    function closeScanner() { document.getElementById('qrModal').classList.remove('active'); }
 
-    function publishCustomRoute() {
-      const title = document.getElementById('newRouteTitle').value.trim();
-      const stopsStr = document.getElementById('newRouteStops').value.trim();
-      const time = document.getElementById('newRouteTime').value.trim() || '1 Día';
-      const desc = document.getElementById('newRouteDesc').value.trim();
-
-      if (!title || !stopsStr) {
-        alert('Por favor ingresa un título y las paradas de tu ruta.');
-        return;
-      }
-
-      const stopsArray = stopsStr.split(',').map(s => s.trim()).filter(Boolean);
-
-      communityRoutes.unshift({
-        id: 'route_' + Date.now(),
-        author: 'Jesús Chacón',
-        handle: '@jesuschacon',
-        avatar: document.getElementById('userAvatarImg').src,
-        tier: userPoints >= 500 ? 'baquiano' : 'explorador',
-        tierLabel: userPoints >= 500 ? 'Nivel 2: Baquiano' : 'Nivel 1: Explorador',
-        isFollowing: false,
-        title: title,
-        time: time,
-        desc: desc || "Ruta compartida con la comunidad viajera de Aragua.",
-        img: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
-        stops: stopsArray,
-        likes: 1,
-        isLiked: true
-      });
-
-      closeCreateRouteModal();
-      awardPoints(80, '¡Ruta publicada! +80 pts sumados');
-      renderSocialFeed();
-      document.getElementById('statRoutesCount').innerText = parseInt(document.getElementById('statRoutesCount').innerText) + 1;
+    function simulateQrDiscount() {
+      closeScanner();
+      userSavings += 8.0;
+      userXP += 50;
+      updateUserScores();
+      showToast('¡Descuento del 10% verificado en tu cuenta!');
     }
 
-    function changeUserAvatar() {
-      const newUrl = prompt("Pega la URL de tu foto o avatar:");
-      if (newUrl && newUrl.trim() !== "") {
-        document.getElementById('userAvatarImg').src = newUrl.trim();
-        showToast("¡Avatar actualizado!");
-      }
-    }
-
-    // CHECK-IN & RECOMPENSAS
-    function executeCheckin(name, stampKey) {
-      awardPoints(20, `Check-in confirmado en ${name}`);
-      unlockStamp(stampKey);
-    }
-
-    function awardPoints(pts, msg) {
-      userPoints += pts;
-      document.getElementById('topPts').innerText = `${userPoints} pts`;
-      document.getElementById('passportPts').innerText = `${userPoints} PTS`;
-      
-      const percent = Math.min((userPoints / 500) * 100, 100);
-      document.getElementById('meterFill').style.width = `${percent}%`;
-      document.getElementById('tierTarget').innerText = `${userPoints} / 500`;
-
-      if (userPoints >= 500) {
-        document.getElementById('cardTier').innerText = 'NIVEL 2: BAQUIANO';
-        document.getElementById('cardTier').style.color = '#10b981';
-      }
-
-      showToast(msg);
-    }
-
-    function unlockStamp(key) {
-      unlockedStamps.add(key);
-      const box = document.getElementById(`stamp-${key}`);
-      const txt = document.getElementById(`stamp-${key}-txt`);
-      if (box) {
-        box.classList.add('unlocked');
-        txt.innerText = 'Desbloqueado';
-        txt.style.color = '#10b981';
-      }
-    }
-
-    function showToast(text) {
-      const toast = document.getElementById('toastMsg');
-      toast.innerText = text;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2600);
-    }
-
-    function switchView(viewId, btn) {
-      document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    // NAVEGACIÓN ENTRE TABS
+    function switchTab(viewId, btn) {
+      document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(viewId).classList.add('active');
       btn.classList.add('active');
     }
 
-    function openScanner() { document.getElementById('qrModal').classList.add('active'); }
-    function closeScanner() { document.getElementById('qrModal').classList.remove('active'); }
-
-    function simulateQrRead() {
-      closeScanner();
-      awardPoints(50, '¡Consumo validado por QR! +50 pts');
+    // TOAST FEEDBACK
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
     }
 
-    // INICIALIZACIÓN
-    renderFlightList('departures');
-    renderSocialFeed();
-    initUserLocation();
+    // ARRANQUE INICIAL
+    renderSelectedMission();
   </script>
 </body>
 </html>
