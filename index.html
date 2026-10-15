@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DESTINOS VEN — Aragua Experience & Radar Aéreo</title>
+  <title>DESTINOS VEN — Google Places & Radar Aragua</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
       --gold-glow: rgba(245, 158, 11, 0.3);
       --cyan: #06b6d4;
       --cyan-glow: rgba(6, 182, 212, 0.3);
+      --google-blue: #4285F4;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
     }
@@ -40,7 +41,7 @@
       justify-content: center;
       background-image: 
         radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.06) 0%, transparent 45%);
+        radial-gradient(circle at 90% 85%, rgba(66, 133, 244, 0.06) 0%, transparent 45%);
     }
 
     .app-viewport {
@@ -112,13 +113,43 @@
       animation: fadeIn 0.25s ease forwards;
     }
 
-    .view-container.active {
-      display: block;
-    }
+    .view-container.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Barra de integración Google */
+    .google-sync-card {
+      background: rgba(66, 133, 244, 0.08);
+      border: 1px solid rgba(66, 133, 244, 0.25);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .google-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .google-pill svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .gps-state {
+      font-size: 0.68rem;
+      color: var(--accent);
+      font-weight: 600;
     }
 
     /* Radar Aéreo Terminal Card */
@@ -129,42 +160,13 @@
       padding: 16px;
       margin-bottom: 20px;
       position: relative;
-      overflow: hidden;
     }
 
     .terminal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .terminal-title-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .terminal-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(6, 182, 212, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--cyan);
-    }
-
-    .terminal-live-tag {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: var(--cyan);
+      margin-bottom: 12px;
     }
 
     .pulse-dot {
@@ -200,7 +202,6 @@
       padding: 6px 0;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
     .flight-toggle-btn.active {
@@ -208,40 +209,19 @@
       color: #fff;
     }
 
-    /* Lista de Vuelos */
     .flight-item {
       background: rgba(0, 0, 0, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 8px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .flight-code {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: #fff;
-    }
-
-    .flight-route {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .flight-status {
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
+    .flight-code { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; color: #fff; }
+    .flight-status { padding: 4px 8px; border-radius: 6px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; }
     .status-on-time { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
     .status-boarding { background: rgba(245, 158, 11, 0.15); color: var(--gold); }
     .status-landed { background: rgba(6, 182, 212, 0.15); color: var(--cyan); }
@@ -266,7 +246,6 @@
       font-weight: 600;
       white-space: nowrap;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
 
     .tab-btn.active {
@@ -276,7 +255,7 @@
       box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
     }
 
-    /* Tarjetas de Destinos */
+    /* Tarjetas de Hoteles / Posadas Google Places */
     .destination-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -305,7 +284,7 @@
       position: absolute;
       top: 14px;
       left: 14px;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(10px);
       padding: 4px 10px;
       border-radius: 8px;
@@ -316,22 +295,54 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .google-rating-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      background: rgba(18, 22, 34, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 4px 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .google-rating-badge svg {
+      width: 12px;
+      height: 12px;
+      fill: #f59e0b;
+    }
+
     .card-body { padding: 16px; }
 
     .card-title-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .card-title { font-size: 1.05rem; font-weight: 700; color: #fff; }
-    .card-dist { font-size: 0.75rem; color: var(--accent); font-weight: 600; }
+    .card-dist { font-size: 0.75rem; color: var(--accent); font-weight: 700; }
+
+    .google-address {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
     .card-benefit {
       display: inline-block;
-      margin: 8px 0 14px;
-      font-size: 0.75rem;
+      margin-bottom: 12px;
+      font-size: 0.72rem;
       color: var(--gold);
       background: rgba(245, 158, 11, 0.08);
       border: 1px solid var(--gold-glow);
@@ -340,24 +351,45 @@
       font-weight: 600;
     }
 
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
     .btn-action {
-      width: 100%;
       background: linear-gradient(135deg, #10b981, #059669);
       border: none;
       color: #fff;
       font-weight: 700;
-      font-size: 0.85rem;
-      padding: 12px;
-      border-radius: 12px;
+      font-size: 0.78rem;
+      padding: 10px;
+      border-radius: 10px;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       box-shadow: 0 4px 16px var(--accent-glow);
     }
 
-    .btn-action:active { transform: scale(0.98); }
+    .btn-maps {
+      background: rgba(66, 133, 244, 0.15);
+      border: 1px solid rgba(66, 133, 244, 0.3);
+      color: #93c5fd;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-action:active, .btn-maps:active { transform: scale(0.98); }
 
     /* Pasaporte Digital */
     .passport-card {
@@ -378,12 +410,7 @@
       margin-bottom: 4px;
     }
 
-    .user-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-    }
+    .user-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
 
     .level-meter {
       background: rgba(255, 255, 255, 0.05);
@@ -558,46 +585,51 @@
       </div>
     </header>
 
-    <!-- Vista 1: Explorar + Terminal Aéreo -->
+    <!-- Vista 1: Explorar + Hoteles Google Places -->
     <main class="view-container active" id="viewExplore">
       
-      <!-- Panel de Vuelos Aeropuerto Los Tacariguas (Maracay - MYC) -->
+      <!-- Sincronización Google Places -->
+      <div class="google-sync-card">
+        <div class="google-pill">
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.4 7.33 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.14 0 9.89 0 12s.45 3.86 1.24 5.42l4.04-3.13z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.6 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.93 6.72-4.93z"/>
+          </svg>
+          Google Places Sync
+        </div>
+        <div class="gps-state" id="userGpsStatus">📍 Activando GPS...</div>
+      </div>
+
+      <!-- Radar Aéreo Terminal Card -->
       <section class="flight-terminal-banner">
         <div class="terminal-header">
-          <div class="terminal-title-group">
-            <div class="terminal-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
-            </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
             <div>
               <div style="font-size:0.8rem; font-weight:700; color:#fff;">Aeropuerto Los Tacariguas</div>
-              <div style="font-size:0.65rem; color:var(--text-muted);">Maracay (MYC) — En directo</div>
+              <div style="font-size:0.62rem; color:var(--text-muted);">Maracay (MYC) — En directo</div>
             </div>
           </div>
-          <div class="terminal-live-tag">
+          <div style="display:flex; align-items:center; gap:6px; font-size:0.65rem; color:var(--cyan); font-weight:800;">
             <span class="pulse-dot"></span> Radar Activo
           </div>
         </div>
 
         <div class="flight-toggle-row">
-          <button class="flight-toggle-btn active" id="btnDepartures" onclick="renderFlightList('departures')">Salidas (Despegues)</button>
-          <button class="flight-toggle-btn" id="btnArrivals" onclick="renderFlightList('arrivals')">Llegadas (Arribos)</button>
+          <button class="flight-toggle-btn active" id="btnDepartures" onclick="renderFlightList('departures')">Salidas</button>
+          <button class="flight-toggle-btn" id="btnArrivals" onclick="renderFlightList('arrivals')">Llegadas</button>
         </div>
 
-        <div id="flightListContainer">
-          <!-- Inyectado dinámicamente -->
-        </div>
-
-        <button class="btn-action" style="margin-top: 10px; background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan-glow); color: var(--cyan); box-shadow: none;" onclick="executeAirportCheckin()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          Check-in en Terminal MYC (+100 pts)
-        </button>
+        <div id="flightListContainer"></div>
       </section>
 
       <!-- Selector de Rutas -->
       <div class="route-tabs">
         <button class="tab-btn active" onclick="filterDestinations('all', this)">Todo Aragua</button>
-        <button class="tab-btn" onclick="filterDestinations('maracay', this)">Maracay Urbano</button>
-        <button class="tab-btn" onclick="filterDestinations('tovar', this)">Colonia Tovar</button>
+        <button class="tab-btn" onclick="filterDestinations('maracay', this)">Maracay (Hoteles)</button>
+        <button class="tab-btn" onclick="filterDestinations('tovar', this)">Colonia Tovar (Posadas)</button>
         <button class="tab-btn" onclick="filterDestinations('costa', this)">Costas (Choroní / Cata)</button>
       </div>
 
@@ -631,7 +663,7 @@
       </div>
       <div class="stamps-grid">
         <div class="stamp-box" id="stamp-maracay">
-          <div class="stamp-icon">🏙️</div>
+          <div class="stamp-icon">🏨</div>
           <div class="stamp-name">Maracay Urbano</div>
           <div style="font-size:0.6rem; color: var(--text-muted); margin-top:2px;" id="stamp-maracay-txt">Pendiente</div>
         </div>
@@ -642,7 +674,7 @@
         </div>
         <div class="stamp-box" id="stamp-costa">
           <div class="stamp-icon">🌊</div>
-          <div class="stamp-name">Bahía & Playas</div>
+          <div class="stamp-name">Choroní & Costas</div>
           <div style="font-size:0.6rem; color: var(--text-muted); margin-top:2px;" id="stamp-costa-txt">Pendiente</div>
         </div>
         <div class="stamp-box" id="stamp-flight">
@@ -658,10 +690,10 @@
       <div style="color: #fff; font-size: 0.9rem; font-weight: 700; margin-bottom: 20px;">ESCANEAR QR DE CONSUMO</div>
       <div class="scanner-frame">
         <div class="laser-line"></div>
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M7 17h.01M17 7h.01M17 7h.01"/></svg>
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M7 17h.01M17 7h.01M17 17h.01"/></svg>
       </div>
       <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 18px; text-align: center; max-width: 240px;">
-        Apunta al código QR del comercio aliado al pagar tu cuenta.
+        Apunta al código QR de la posada u hotel para sumar tus puntos de consumo.
       </p>
       <button class="btn-action" style="margin-top: 24px; max-width: 200px;" onclick="simulateQrRead()">
         Simular Lectura (+50 pts)
@@ -671,7 +703,7 @@
       </button>
     </div>
 
-    <!-- Navegación Inferior -->
+    <!-- Barra Inferior -->
     <nav class="bottom-bar">
       <button class="nav-item active" id="tabNavExplore" onclick="switchView('viewExplore', this)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
@@ -692,13 +724,173 @@
   <script>
     let userPoints = 120;
     const unlockedStamps = new Set();
+    let userCoords = null;
 
-    // Data de Vuelos Aeropuerto Los Tacariguas (Maracay)
+    // Catálogo con datos de Google Places y Coordenadas Reales de Aragua
+    const googleDestinations = [
+      {
+        id: 'place_mcy_1',
+        name: 'Hotel Maracay Golf & Spa',
+        zone: 'maracay',
+        tag: 'Hotel Histórico & Golf',
+        googleRating: 4.4,
+        googleReviewsCount: 1420,
+        address: 'Av. Las Delicias, Final El Castaño, Maracay',
+        lat: 10.2921,
+        lng: -67.5960,
+        googleMapsUrl: 'https://maps.google.com/?q=Hotel+Maracay+Golf',
+        benefit: 'Nivel 2+: 10% OFF en DayPass & Spa',
+        img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+        stampKey: 'maracay'
+      },
+      {
+        id: 'place_tovar_1',
+        name: 'Bergland Posada & Restaurant',
+        zone: 'tovar',
+        tag: 'Posada Tradicional Alemana',
+        googleRating: 4.7,
+        googleReviewsCount: 890,
+        address: 'Sector El Rincón, Colonia Tovar',
+        lat: 10.4072,
+        lng: -67.2885,
+        googleMapsUrl: 'https://maps.google.com/?q=Colonia+Tovar+Posada',
+        benefit: 'Nivel 2+: Desayuno artesanal y café de cortesía',
+        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+        stampKey: 'tovar'
+      },
+      {
+        id: 'place_costa_1',
+        name: 'Posada La Cotoperix',
+        zone: 'costa',
+        tag: 'Posada Boutique Colonial',
+        googleRating: 4.6,
+        googleReviewsCount: 520,
+        address: 'Calle Morillo, Casco Colonial, Choroní',
+        lat: 10.4912,
+        lng: -67.6105,
+        googleMapsUrl: 'https://maps.google.com/?q=Posada+Choroni+Aragua',
+        benefit: 'Nivel 2+: 15% OFF en fin de semana + Coctel',
+        img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+        stampKey: 'costa'
+      },
+      {
+        id: 'place_mcy_2',
+        name: 'Eurobuilding Express Maracay',
+        zone: 'maracay',
+        tag: 'Hotel Ejecutivo 5 Estrellas',
+        googleRating: 4.5,
+        googleReviewsCount: 1980,
+        address: 'Centro Comercial Parque Los Aviadores / Maracay Centro',
+        lat: 10.2355,
+        lng: -67.5742,
+        googleMapsUrl: 'https://maps.google.com/?q=Eurobuilding+Maracay',
+        benefit: 'Nivel 2+: Late Check-out sin cargo adicional',
+        img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+        stampKey: 'maracay'
+      }
+    ];
+
+    // Cálculo Haversine de Distancia Exacta en KM
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radio tierra en km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return (R * c).toFixed(1);
+    }
+
+    // Inicializar Geolocalización del Usuario
+    function initUserLocation() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            userCoords = {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude
+            };
+            document.getElementById('userGpsStatus').innerText = '📍 GPS Aragua Activo';
+            renderDestinations(googleDestinations);
+          },
+          (err) => {
+            document.getElementById('userGpsStatus').innerText = '📍 GPS en espera';
+            renderDestinations(googleDestinations);
+          }
+        );
+      } else {
+        renderDestinations(googleDestinations);
+      }
+    }
+
+    // Renderizar Posadas y Hoteles con Ficha de Google Places
+    function renderDestinations(items) {
+      const list = document.getElementById('destinationsList');
+      list.innerHTML = items.map(d => {
+        let distText = '● Verificando GPS';
+        if (userCoords) {
+          const km = calculateDistance(userCoords.lat, userCoords.lng, d.lat, d.lng);
+          distText = `A ${km} km de ti`;
+        }
+
+        return `
+          <article class="destination-card">
+            <div class="card-img-wrap">
+              <span class="card-tag">${d.tag}</span>
+              <img src="${d.img}" alt="${d.name}" loading="lazy">
+              
+              <!-- Badge de Rating Google Places -->
+              <div class="google-rating-badge">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>${d.googleRating}</span>
+                <span style="color:var(--text-muted); font-size:0.65rem;">(${d.googleReviewsCount})</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title">${d.name}</h2>
+                <span class="card-dist">${distText}</span>
+              </div>
+              <div class="google-address">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                ${d.address}
+              </div>
+              <div class="card-benefit">${d.benefit}</div>
+              
+              <div class="actions-grid">
+                <a href="${d.googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="btn-maps">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  Google Maps
+                </a>
+                <button class="btn-action" onclick="executeCheckin('${d.name}', '${d.stampKey}')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  Check-in (+20)
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Filtrar por Zona
+    function filterDestinations(zone, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (zone === 'all') {
+        renderDestinations(googleDestinations);
+      } else {
+        renderDestinations(googleDestinations.filter(d => d.zone === zone));
+      }
+    }
+
+    // Vuelos
     const flightData = {
       departures: [
         { code: 'V0-1420', airline: 'Conviasa / Chárter', destination: 'Los Roques (SVRS)', time: '07:30 AM', status: 'En Hora', class: 'status-on-time' },
-        { code: 'ALB-302', airline: 'Albatros Air', destination: 'Porlamar / Margarita (PMV)', time: '09:15 AM', status: 'Abordando', class: 'status-boarding' },
-        { code: 'AER-810', airline: 'AeroLink Chárter', destination: 'Canaima (SVCN)', time: '11:40 AM', status: 'En Hora', class: 'status-on-time' }
+        { code: 'ALB-302', airline: 'Albatros Air', destination: 'Porlamar / Margarita (PMV)', time: '09:15 AM', status: 'Abordando', class: 'status-boarding' }
       ],
       arrivals: [
         { code: 'V0-1421', airline: 'Conviasa / Chárter', origin: 'Los Roques (SVRS)', time: '04:45 PM', status: 'En Vuelo', class: 'status-on-time' },
@@ -718,7 +910,7 @@
           <div class="flight-item">
             <div>
               <div class="flight-code">${f.code} <span style="font-size:0.65rem; color:var(--cyan); font-weight:400;">${f.airline}</span></div>
-              <div class="flight-route">Destino: <strong>${f.destination}</strong> • ${f.time}</div>
+              <div style="font-size:0.7rem; color:var(--text-muted);">A: <strong>${f.destination}</strong> • ${f.time}</div>
             </div>
             <span class="flight-status ${f.class}">${f.status}</span>
           </div>
@@ -730,7 +922,7 @@
           <div class="flight-item">
             <div>
               <div class="flight-code">${f.code} <span style="font-size:0.65rem; color:var(--cyan); font-weight:400;">${f.airline}</span></div>
-              <div class="flight-route">Origen: <strong>${f.origin}</strong> • ${f.time}</div>
+              <div style="font-size:0.7rem; color:var(--text-muted);">De: <strong>${f.origin}</strong> • ${f.time}</div>
             </div>
             <span class="flight-status ${f.class}">${f.status}</span>
           </div>
@@ -738,81 +930,9 @@
       }
     }
 
-    function executeAirportCheckin() {
-      awardPoints(100, '¡Visita al Terminal Aéreo MYC! +100 pts');
-      unlockStamp('flight');
-    }
-
-    // Catálogo de Aliados
-    const destinations = [
-      {
-        id: '1',
-        name: 'Cacao & Brasas Bistro',
-        zone: 'maracay',
-        tag: 'Gastrobar Urbano',
-        locationStr: 'Las Delicias, Maracay',
-        benefit: 'Nivel 2+: 10% OFF en Cenas',
-        img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'maracay'
-      },
-      {
-        id: '2',
-        name: 'Posada Selva de Niebla',
-        zone: 'tovar',
-        tag: 'Hospedaje de Montaña',
-        locationStr: 'Colonia Tovar',
-        benefit: 'Nivel 2+: Copa de Vino & Fondue',
-        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'tovar'
-      },
-      {
-        id: '3',
-        name: 'Bahía Azul Eco-Lodge',
-        zone: 'costa',
-        tag: 'Posada Boutique',
-        locationStr: 'Bahía de Cata / Ocumare',
-        benefit: 'Nivel 2+: 15% OFF en estadías',
-        img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'costa'
-      }
-    ];
-
-    function renderDestinations(items) {
-      const list = document.getElementById('destinationsList');
-      list.innerHTML = items.map(d => `
-        <article class="destination-card">
-          <div class="card-img-wrap">
-            <span class="card-tag">${d.tag}</span>
-            <img src="${d.img}" alt="${d.name}" loading="lazy">
-          </div>
-          <div class="card-body">
-            <div class="card-title-row">
-              <h2 class="card-title">${d.name}</h2>
-              <span class="card-dist">● GPS Listo</span>
-            </div>
-            <div style="font-size:0.75rem; color:var(--text-muted);">${d.locationStr}</div>
-            <div class="card-benefit">${d.benefit}</div>
-            <button class="btn-action" onclick="executeCheckin('${d.name}', '${d.stampKey}')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Verificar Visita (+20 pts)
-            </button>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    function filterDestinations(zone, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (zone === 'all') {
-        renderDestinations(destinations);
-      } else {
-        renderDestinations(destinations.filter(d => d.zone === zone));
-      }
-    }
-
-    function executeCheckin(destName, stampKey) {
-      awardPoints(20, `Check-in confirmado en ${destName}`);
+    // Check-ins & Gamificación
+    function executeCheckin(name, stampKey) {
+      awardPoints(20, `Check-in confirmado en ${name}`);
       unlockStamp(stampKey);
     }
 
@@ -868,7 +988,7 @@
 
     // Arranque
     renderFlightList('departures');
-    renderDestinations(destinations);
+    initUserLocation();
   </script>
 </body>
 </html>
