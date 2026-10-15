@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DESTINOS VEN — Google Places & Radar Aragua</title>
+  <title>DESTINOS VEN — Red Social de Expedición</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@
       justify-content: center;
       background-image: 
         radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 85%, rgba(66, 133, 244, 0.06) 0%, transparent 45%);
+        radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.06) 0%, transparent 45%);
     }
 
     .app-viewport {
@@ -58,8 +58,9 @@
       padding-bottom: 90px;
     }
 
+    /* Header */
     header {
-      padding: 24px 20px 16px;
+      padding: 20px 20px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -141,16 +142,8 @@
       color: #fff;
     }
 
-    .google-pill svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .gps-state {
-      font-size: 0.68rem;
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .google-pill svg { width: 16px; height: 16px; }
+    .gps-state { font-size: 0.68rem; color: var(--accent); font-weight: 600; }
 
     /* Radar Aéreo Terminal Card */
     .flight-terminal-banner {
@@ -204,10 +197,7 @@
       cursor: pointer;
     }
 
-    .flight-toggle-btn.active {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-    }
+    .flight-toggle-btn.active { background: rgba(255, 255, 255, 0.1); color: #fff; }
 
     .flight-item {
       background: rgba(0, 0, 0, 0.25);
@@ -312,12 +302,7 @@
       color: #fff;
     }
 
-    .google-rating-badge svg {
-      width: 12px;
-      height: 12px;
-      fill: #f59e0b;
-    }
-
+    .google-rating-badge svg { width: 12px; height: 12px; fill: #f59e0b; }
     .card-body { padding: 16px; }
 
     .card-title-row {
@@ -391,70 +376,303 @@
 
     .btn-action:active, .btn-maps:active { transform: scale(0.98); }
 
-    /* Pasaporte Digital */
-    .passport-card {
-      background: linear-gradient(135deg, #161b26 0%, #0d1117 100%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
-      padding: 24px;
-      position: relative;
-      margin-bottom: 24px;
-    }
+    /* ============================================================ */
+    /* ESTILOS DE RED SOCIAL (FEED DE RUTAS & PERFIL)               */
+    /* ============================================================ */
 
-    .user-tier {
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .user-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
-
-    .level-meter {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 999px;
-      height: 8px;
-      width: 100%;
-      margin: 14px 0 8px;
-      overflow: hidden;
-    }
-
-    .level-fill {
-      background: linear-gradient(90deg, var(--accent), var(--gold));
-      height: 100%;
-      border-radius: 999px;
-      transition: width 0.5s ease;
-    }
-
-    .stamps-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 12px;
-    }
-
-    .stamp-box {
+    /* Tarjeta de Ruta Social */
+    .route-post-card {
       background: var(--card-bg);
-      border: 1px dashed var(--card-border);
-      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
       padding: 16px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(16px);
+    }
+
+    .author-row {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+
+    .author-meta h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .author-meta span {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .tier-chip {
+      font-size: 0.6rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .tier-chip.embajador { background: rgba(245, 158, 11, 0.2); color: var(--gold); border: 1px solid var(--gold-glow); }
+    .tier-chip.cronista { background: rgba(6, 182, 212, 0.2); color: var(--cyan); border: 1px solid var(--cyan-glow); }
+    .tier-chip.baquiano { background: rgba(16, 185, 129, 0.2); color: var(--accent); border: 1px solid var(--accent-glow); }
+    .tier-chip.explorador { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
+
+    .btn-follow {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-follow.following {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .route-post-img {
+      width: 100%;
+      height: 180px;
+      border-radius: 14px;
+      object-fit: cover;
+      margin: 10px 0;
+    }
+
+    .route-timeline-steps {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+
+    .step-pill {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .route-post-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: 10px;
+    }
+
+    .btn-like {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-like.liked {
+      color: #ef4444;
+    }
+
+    .btn-like.liked svg {
+      fill: #ef4444;
+      stroke: #ef4444;
+    }
+
+    /* Perfil Social del Usuario */
+    .profile-hero {
+      background: linear-gradient(135deg, #161b26 0%, #0d1117 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 12px;
+    }
+
+    .avatar-profile-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .avatar-edit-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--accent);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid #0d1117;
+    }
+
+    .avatar-edit-badge svg { width: 12px; height: 12px; stroke: #fff; }
+
+    .profile-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .profile-handle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .profile-bio {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      max-width: 280px;
+      margin: 0 auto 16px;
+      line-height: 1.4;
+    }
+
+    .social-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .stat-item .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-item .label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Formulario / Modal para Crear Rutas */
+    .btn-create-route {
+      background: linear-gradient(135deg, var(--accent), #059669);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 4px 16px var(--accent-glow);
+      margin-bottom: 16px;
+    }
+
+    .route-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 120;
+      display: none;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      transition: all 0.3s;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .stamp-box.unlocked {
-      border: 1px solid var(--accent);
-      background: rgba(16, 185, 129, 0.04);
+    .route-modal.active { display: flex; }
+
+    .modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: #0d111a;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 20px;
     }
 
-    .stamp-icon { font-size: 1.6rem; margin-bottom: 6px; opacity: 0.3; filter: grayscale(1); }
-    .stamp-box.unlocked .stamp-icon { opacity: 1; filter: none; }
-    .stamp-name { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
-    .stamp-box.unlocked .stamp-name { color: #fff; }
+    .modal-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .input-field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent);
+    }
 
     /* Modal QR */
     .qr-modal {
@@ -577,7 +795,7 @@
     <header>
       <div class="brand-group">
         <h1>DESTINOS VEN</h1>
-        <div class="brand-sub">Circuito Aragua</div>
+        <div class="brand-sub">Comunidad Aragua</div>
       </div>
       <div class="status-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -585,10 +803,8 @@
       </div>
     </header>
 
-    <!-- Vista 1: Explorar + Hoteles Google Places -->
+    <!-- Vista 1: Explorar (Google Places + Vuelos) -->
     <main class="view-container active" id="viewExplore">
-      
-      <!-- Sincronización Google Places -->
       <div class="google-sync-card">
         <div class="google-pill">
           <svg viewBox="0 0 24 24">
@@ -599,10 +815,10 @@
           </svg>
           Google Places Sync
         </div>
-        <div class="gps-state" id="userGpsStatus">📍 Activando GPS...</div>
+        <div class="gps-state" id="userGpsStatus">📍 GPS Aragua Activo</div>
       </div>
 
-      <!-- Radar Aéreo Terminal Card -->
+      <!-- Radar Aéreo -->
       <section class="flight-terminal-banner">
         <div class="terminal-header">
           <div style="display:flex; align-items:center; gap:8px;">
@@ -621,7 +837,6 @@
           <button class="flight-toggle-btn active" id="btnDepartures" onclick="renderFlightList('departures')">Salidas</button>
           <button class="flight-toggle-btn" id="btnArrivals" onclick="renderFlightList('arrivals')">Llegadas</button>
         </div>
-
         <div id="flightListContainer"></div>
       </section>
 
@@ -636,23 +851,61 @@
       <div id="destinationsList" style="margin-top: 14px;"></div>
     </main>
 
-    <!-- Vista 2: Pasaporte Digital -->
+    <!-- Vista 2: Red Social (Feed de Rutas de la Comunidad) -->
+    <main class="view-container" id="viewFeed">
+      <button class="btn-create-route" onclick="openCreateRouteModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Publicar Mi Ruta en Aragua (+80 pts)
+      </button>
+
+      <div style="font-family:'Space Grotesk'; font-size:0.95rem; font-weight:700; color:#fff; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+        <span>Bitácora de Viajeros</span>
+        <span style="font-size:0.7rem; color:var(--accent);">● En Vivo</span>
+      </div>
+
+      <div id="socialFeedContainer">
+        <!-- Inyectado dinámicamente -->
+      </div>
+    </main>
+
+    <!-- Vista 3: Mi Perfil Social & Pasaporte -->
     <main class="view-container" id="viewPassport">
-      <div class="passport-card">
-        <div style="display:flex; justify-content:space-between; margin-bottom: 24px;">
-          <div>
-            <div class="user-tier" id="cardTier">NIVEL 1: EXPLORADOR</div>
-            <div class="user-name">Viajero Ven</div>
+      <!-- Tarjeta de Perfil Social -->
+      <div class="profile-hero">
+        <div class="avatar-wrapper">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Avatar" class="avatar-profile-img" id="userAvatarImg">
+          <div class="avatar-edit-badge" onclick="changeUserAvatar()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </div>
-          <div style="font-family: 'Space Grotesk'; font-size: 1.4rem; font-weight: 700; color: var(--accent);" id="passportPts">
-            120 PTS
+        </div>
+        <div class="profile-name" id="profileNameDisplay">Jesús Chacón</div>
+        <div class="profile-handle" id="profileHandleDisplay">@jesuschacon • Aragua, VE</div>
+        <div class="profile-bio" id="profileBioDisplay">Cineasta & viajero. Explorando las playas de Choroní y los rincones coloniales de Aragua.</div>
+
+        <div class="social-stats-row">
+          <div class="stat-item">
+            <div class="num" id="statRoutesCount">2</div>
+            <div class="label">Rutas</div>
           </div>
+          <div class="stat-item">
+            <div class="num">1.4K</div>
+            <div class="label">Seguidores</div>
+          </div>
+          <div class="stat-item">
+            <div class="num">380</div>
+            <div class="label">Siguiendo</div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+          <span class="user-tier" id="cardTier">NIVEL 1: EXPLORADOR</span>
+          <span style="font-family:'Space Grotesk'; font-size:1.1rem; font-weight:700; color:var(--accent);" id="passportPts">120 PTS</span>
         </div>
         
         <div class="level-meter">
           <div class="level-fill" id="meterFill" style="width: 24%;"></div>
         </div>
-        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+        <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-muted);">
           <span>Próximo Rango: Baquiano</span>
           <span id="tierTarget">120 / 500</span>
         </div>
@@ -685,6 +938,24 @@
       </div>
     </main>
 
+    <!-- Modal para Publicar Ruta -->
+    <div class="route-modal" id="routeModal">
+      <div class="modal-box">
+        <div class="modal-title">Publicar Nueva Ruta</div>
+        <input type="text" class="input-field" id="newRouteTitle" placeholder="Título (ej: Escapada Mágica a Choroní)">
+        <input type="text" class="input-field" id="newRouteStops" placeholder="Paradas separadas por coma (ej: Cacao Bistro, Playa Grande)">
+        <input type="text" class="input-field" id="newRouteTime" placeholder="Duración (ej: 2 días / 1 noche)">
+        <textarea class="input-field" id="newRouteDesc" rows="3" placeholder="Cuéntale a la comunidad tus mejores tips y por qué deberían hacerla..."></textarea>
+        
+        <button class="btn-action" style="width:100%; margin-top:6px;" onclick="publishCustomRoute()">
+          Publicar y Ganar +80 Pts
+        </button>
+        <button onclick="closeCreateRouteModal()" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:12px; font-size:0.75rem; cursor:pointer;">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
     <!-- Modal QR -->
     <div class="qr-modal" id="qrModal">
       <div style="color: #fff; font-size: 0.9rem; font-weight: 700; margin-bottom: 20px;">ESCANEAR QR DE CONSUMO</div>
@@ -703,11 +974,16 @@
       </button>
     </div>
 
-    <!-- Barra Inferior -->
+    <!-- Barra de Navegación Inferior (3 Vistas Principales + QR) -->
     <nav class="bottom-bar">
       <button class="nav-item active" id="tabNavExplore" onclick="switchView('viewExplore', this)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        Explorar
+        Destinos
+      </button>
+
+      <button class="nav-item" id="tabNavFeed" onclick="switchView('viewFeed', this)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Comunidad
       </button>
 
       <button class="scan-nav-btn" onclick="openScanner()">
@@ -716,7 +992,7 @@
 
       <button class="nav-item" id="tabNavPassport" onclick="switchView('viewPassport', this)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Pasaporte
+        Mi Perfil
       </button>
     </nav>
   </div>
@@ -726,7 +1002,52 @@
     const unlockedStamps = new Set();
     let userCoords = null;
 
-    // Catálogo con datos de Google Places y Coordenadas Reales de Aragua
+    // Perfil del Usuario Actual
+    let myProfile = {
+      name: "Jesús Chacón",
+      handle: "@jesuschacon",
+      bio: "Cineasta & viajero. Explorando las playas de Choroní y los rincones coloniales de Aragua.",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+      routesCount: 2
+    };
+
+    // Base Social: Rutas Publicadas por la Comunidad (Con usuarios de mayor nivel)
+    let communityRoutes = [
+      {
+        id: 'route_1',
+        author: 'Valeria Mendoza',
+        handle: '@valeriatours',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
+        tier: 'embajador',
+        tierLabel: 'Nivel 4: Embajador',
+        isFollowing: false,
+        title: 'Travesía Costera Secreta: De Maracay a Chuao',
+        time: 'Fin de semana (3 Días)',
+        desc: 'Salimos a las 6 AM de Las Delicias, parada técnica de café y directo por el Parque Nacional Henri Pittier. La posada en Choroní te da un 15% mostrando tu rango.',
+        img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+        stops: ['Las Delicias', 'Henri Pittier', 'Puerto Colombia', 'Chuao'],
+        likes: 142,
+        isLiked: false
+      },
+      {
+        id: 'route_2',
+        author: 'Carlos Henriquez',
+        handle: '@carlos_tovar',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+        tier: 'cronista',
+        tierLabel: 'Nivel 3: Cronista',
+        isFollowing: true,
+        title: 'Ruta de Neblina & Cervezas Artesanales en Tovar',
+        time: '1 Día Completo',
+        desc: 'Una ruta rápida perfecta para escapar del calor. Lleguen directo a Bergland para el almuerzo y luego recorran las fábricas de chocolate en el centro.',
+        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+        stops: ['El Rincón', 'Cervecería Tovar', 'Posada Bergland'],
+        likes: 89,
+        isLiked: false
+      }
+    ];
+
+    // Destinos Google Places
     const googleDestinations = [
       {
         id: 'place_mcy_1',
@@ -772,27 +1093,146 @@
         benefit: 'Nivel 2+: 15% OFF en fin de semana + Coctel',
         img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
         stampKey: 'costa'
-      },
-      {
-        id: 'place_mcy_2',
-        name: 'Eurobuilding Express Maracay',
-        zone: 'maracay',
-        tag: 'Hotel Ejecutivo 5 Estrellas',
-        googleRating: 4.5,
-        googleReviewsCount: 1980,
-        address: 'Centro Comercial Parque Los Aviadores / Maracay Centro',
-        lat: 10.2355,
-        lng: -67.5742,
-        googleMapsUrl: 'https://maps.google.com/?q=Eurobuilding+Maracay',
-        benefit: 'Nivel 2+: Late Check-out sin cargo adicional',
-        img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-        stampKey: 'maracay'
       }
     ];
 
-    // Cálculo Haversine de Distancia Exacta en KM
+    // ==========================================================
+    // LÓGICA SOCIAL: FEED, FOLLOWS, LIKES & CREACIÓN DE RUTAS
+    // ==========================================================
+
+    function renderSocialFeed() {
+      const container = document.getElementById('socialFeedContainer');
+      container.innerHTML = communityRoutes.map(r => `
+        <article class="route-post-card">
+          <div class="author-row">
+            <div class="author-info">
+              <img src="${r.avatar}" class="author-avatar" alt="${r.author}">
+              <div class="author-meta">
+                <h4>
+                  ${r.author}
+                  <span class="tier-chip ${r.tier}">${r.tierLabel}</span>
+                </h4>
+                <span>${r.handle} • ${r.time}</span>
+              </div>
+            </div>
+            <button class="btn-follow ${r.isFollowing ? 'following' : ''}" onclick="toggleFollow('${r.id}')">
+              ${r.isFollowing ? 'Siguiendo' : '+ Seguir'}
+            </button>
+          </div>
+
+          <h3 style="font-size:0.95rem; color:#fff; font-weight:700; margin-bottom:6px;">${r.title}</h3>
+          <p style="font-size:0.75rem; color:#cbd5e1; line-height:1.4;">${r.desc}</p>
+
+          <img src="${r.img}" class="route-post-img" alt="${r.title}">
+
+          <div class="route-timeline-steps">
+            ${r.stops.map((s, idx) => `
+              <span class="step-pill">
+                <span style="color:var(--accent); font-weight:700;">${idx+1}.</span>${s}
+              </span>
+            `).join('')}
+          </div>
+
+          <div class="route-post-footer">
+            <button class="btn-like ${r.isLiked ? 'liked' : ''}" onclick="toggleLike('${r.id}')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>${r.likes} Inspirados</span>
+            </button>
+            <button class="btn-action" style="padding:6px 12px; font-size:0.7rem;" onclick="adoptRoute('${r.title}')">
+              Hacer esta Ruta
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function toggleFollow(routeId) {
+      const route = communityRoutes.find(r => r.id === routeId);
+      if (route) {
+        route.isFollowing = !route.isFollowing;
+        showToast(route.isFollowing ? `Comenzaste a seguir a ${route.author}` : `Dejaste de seguir a ${route.author}`);
+        renderSocialFeed();
+      }
+    }
+
+    function toggleLike(routeId) {
+      const route = communityRoutes.find(r => r.id === routeId);
+      if (route) {
+        route.isLiked = !route.isLiked;
+        route.likes += route.isLiked ? 1 : -1;
+        renderSocialFeed();
+      }
+    }
+
+    function adoptRoute(title) {
+      showToast(`¡Ruta guardada en tu itinerario!`);
+    }
+
+    // Modal de Creación de Ruta
+    function openCreateRouteModal() { document.getElementById('routeModal').classList.add('active'); }
+    function closeCreateRouteModal() { document.getElementById('routeModal').classList.remove('active'); }
+
+    function publishCustomRoute() {
+      const title = document.getElementById('newRouteTitle').value.trim();
+      const stopsStr = document.getElementById('newRouteStops').value.trim();
+      const time = document.getElementById('newRouteTime').value.trim() || '1 Día';
+      const desc = document.getElementById('newRouteDesc').value.trim();
+
+      if (!title || !stopsStr) {
+        alert('Por favor ingresa al menos un título y las paradas de tu ruta.');
+        return;
+      }
+
+      const stopsArray = stopsStr.split(',').map(s => s.trim()).filter(Boolean);
+
+      const newRoute = {
+        id: 'route_' + Date.now(),
+        author: myProfile.name,
+        handle: myProfile.handle,
+        avatar: myProfile.avatar,
+        tier: userPoints >= 500 ? 'baquiano' : 'explorador',
+        tierLabel: userPoints >= 500 ? 'Nivel 2: Baquiano' : 'Nivel 1: Explorador',
+        isFollowing: false,
+        title: title,
+        time: time,
+        desc: desc || "Ruta recomendada por mí para disfrutar los mejores spots de Aragua.",
+        img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+        stops: stopsArray,
+        likes: 1,
+        isLiked: true
+      };
+
+      communityRoutes.unshift(newRoute);
+      myProfile.routesCount++;
+      document.getElementById('statRoutesCount').innerText = myProfile.routesCount;
+
+      closeCreateRouteModal();
+      awardPoints(80, '¡Ruta publicada con éxito! +80 pts');
+      renderSocialFeed();
+
+      // Limpiar campos
+      document.getElementById('newRouteTitle').value = '';
+      document.getElementById('newRouteStops').value = '';
+      document.getElementById('newRouteTime').value = '';
+      document.getElementById('newRouteDesc').value = '';
+    }
+
+    // Editar Avatar del Perfil
+    function changeUserAvatar() {
+      const newUrl = prompt("Pega el enlace URL de tu foto o avatar:", myProfile.avatar);
+      if (newUrl && newUrl.trim() !== "") {
+        myProfile.avatar = newUrl.trim();
+        document.getElementById('userAvatarImg').src = myProfile.avatar;
+        showToast("¡Foto de perfil actualizada!");
+      }
+    }
+
+    // ==========================================================
+    // LÓGICA DE DESTINOS, VUELOS, PUNTOS & GEOLOCALIZACIÓN
+    // ==========================================================
+
     function calculateDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371; // Radio tierra en km
+      const R = 6371;
       const dLat = (lat2 - lat1) * Math.PI / 180;
       const dLon = (lon2 - lon1) * Math.PI / 180;
       const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -802,36 +1242,28 @@
       return (R * c).toFixed(1);
     }
 
-    // Inicializar Geolocalización del Usuario
     function initUserLocation() {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            userCoords = {
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude
-            };
+            userCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
             document.getElementById('userGpsStatus').innerText = '📍 GPS Aragua Activo';
             renderDestinations(googleDestinations);
           },
-          (err) => {
-            document.getElementById('userGpsStatus').innerText = '📍 GPS en espera';
-            renderDestinations(googleDestinations);
-          }
+          () => { renderDestinations(googleDestinations); }
         );
       } else {
         renderDestinations(googleDestinations);
       }
     }
 
-    // Renderizar Posadas y Hoteles con Ficha de Google Places
     function renderDestinations(items) {
       const list = document.getElementById('destinationsList');
       list.innerHTML = items.map(d => {
-        let distText = '● Verificando GPS';
+        let distText = '● GPS Listo';
         if (userCoords) {
           const km = calculateDistance(userCoords.lat, userCoords.lng, d.lat, d.lng);
-          distText = `A ${km} km de ti`;
+          distText = `A ${km} km`;
         }
 
         return `
@@ -839,15 +1271,12 @@
             <div class="card-img-wrap">
               <span class="card-tag">${d.tag}</span>
               <img src="${d.img}" alt="${d.name}" loading="lazy">
-              
-              <!-- Badge de Rating Google Places -->
               <div class="google-rating-badge">
                 <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <span>${d.googleRating}</span>
                 <span style="color:var(--text-muted); font-size:0.65rem;">(${d.googleReviewsCount})</span>
               </div>
             </div>
-
             <div class="card-body">
               <div class="card-title-row">
                 <h2 class="card-title">${d.name}</h2>
@@ -858,7 +1287,6 @@
                 ${d.address}
               </div>
               <div class="card-benefit">${d.benefit}</div>
-              
               <div class="actions-grid">
                 <a href="${d.googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="btn-maps">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
@@ -875,7 +1303,6 @@
       }).join('');
     }
 
-    // Filtrar por Zona
     function filterDestinations(zone, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -893,8 +1320,7 @@
         { code: 'ALB-302', airline: 'Albatros Air', destination: 'Porlamar / Margarita (PMV)', time: '09:15 AM', status: 'Abordando', class: 'status-boarding' }
       ],
       arrivals: [
-        { code: 'V0-1421', airline: 'Conviasa / Chárter', origin: 'Los Roques (SVRS)', time: '04:45 PM', status: 'En Vuelo', class: 'status-on-time' },
-        { code: 'ALB-303', airline: 'Albatros Air', origin: 'Porlamar (PMV)', time: '05:30 PM', status: 'Aterrizado', class: 'status-landed' }
+        { code: 'V0-1421', airline: 'Conviasa / Chárter', origin: 'Los Roques (SVRS)', time: '04:45 PM', status: 'En Vuelo', class: 'status-on-time' }
       ]
     };
 
@@ -930,7 +1356,7 @@
       }
     }
 
-    // Check-ins & Gamificación
+    // Sistema de Puntos
     function executeCheckin(name, stampKey) {
       awardPoints(20, `Check-in confirmado en ${name}`);
       unlockStamp(stampKey);
@@ -971,6 +1397,7 @@
       setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
+    // Navegación
     function switchView(viewId, btn) {
       document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -988,6 +1415,7 @@
 
     // Arranque
     renderFlightList('departures');
+    renderSocialFeed();
     initUserLocation();
   </script>
 </body>
